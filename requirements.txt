@@ -1,0 +1,8 @@
+dm_control
+shimmy[dm-control-multi-agent]
+pettingzoo
+torch
+stable-baselines3
+supersuit
+tensorboard
+jupyter
