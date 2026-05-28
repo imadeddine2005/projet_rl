@@ -1,0 +1,33 @@
+
+\chapter*{\center \Large  Abstract}
+
+This report presents a multi-agent Deep Reinforcement Learning (DRL) system 
+applied to a cooperative and competitive 2-versus-2 football task simulated 
+in the MuJoCo physics engine. The investigated problem is how autonomous agents 
+can learn to coordinate, pursue a ball, and score goals without any hand-crafted 
+rules or human demonstrations. 
+
+The methodology follows a three-stage progression grounded in course material: 
+first, Q-Learning with a tabular Q-table is demonstrated on the FrozenLake-v1 
+environment to establish foundational concepts of the Bellman equation and 
+epsilon-greedy exploration; second, a Deep Q-Network (DQN) with experience replay 
+and a target network is implemented on CartPole-v1 to introduce function 
+approximation; third, Proximal Policy Optimisation (PPO) with parameter sharing 
+is applied to the MuJoCo Soccer 2v2 environment as the main contribution. 
+Custom reward shaping is designed and implemented, combining a distance penalty, 
+a velocity-to-ball reward, and a ball-to-goal velocity reward to guide the agents 
+towards productive behaviour. Training is conducted on Google Colab using a T4 GPU 
+and the Stable-Baselines3 library, with automatic checkpointing to Google Drive.
+
+Results show that the Q-Learning agent achieves a 62\% win rate on FrozenLake 
+compared to a 1.5\% random baseline, and the DQN agent steadily improves its 
+CartPole score from 23 to over 140 steps. The PPO soccer agents demonstrate 
+progressive improvement in their average episodic reward across training. The 
+findings confirm that reward shaping significantly accelerates learning in 
+sparse-reward, physics-based multi-agent environments.
+
+~\\[1cm]
+\noindent
+\textbf{Keywords:} Reinforcement Learning, Proximal Policy Optimisation, 
+Multi-Agent Systems, MuJoCo, Deep Q-Network, Reward Shaping, Parameter Sharing, 
+PettingZoo.

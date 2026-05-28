@@ -6,3 +6,5 @@ stable-baselines3
 supersuit
 tensorboard
 jupyter
+gymnasium[classic-control]
+matplotlib

@@ -1,0 +1,96 @@
+\chapter{Reflection}
+\label{ch:reflection}
+
+This chapter presents a personal reflection on the project experience. It goes 
+beyond a list of technical skills to examine the decision-making process, the 
+challenges encountered, and the lessons learned throughout the project.
+
+% ================================================================
+
+\noindent\textbf{Knowledge and Skills Developed.}
+Before this project, our understanding of reinforcement learning was limited 
+to the theoretical definitions introduced in lectures: the agent-environment 
+loop, rewards, and the Bellman equation. Building and running all three 
+experimental stages transformed this abstract knowledge into concrete 
+engineering competence. We now understand not only \textit{what} PPO does, 
+but \textit{why} each design choice — the clipped objective, the advantage 
+estimate, the entropy bonus — exists and what failure mode it prevents. 
+Setting up the MuJoCo environment required navigating multiple interoperating 
+libraries (Shimmy, PettingZoo, SuperSuit, Stable-Baselines3) and debugging 
+serialisation errors related to multiprocessing and cloudpickle. This 
+practical systems-engineering experience is something that no theoretical 
+course can fully replicate.
+
+\bigskip
+\noindent\textbf{Decision-Making and Problem-Solving.}
+The most consequential decision in this project was the choice of PPO over 
+DQN for the main multi-agent task. DQN, which we implemented first, 
+cannot handle continuous action spaces — and the MuJoCo soccer environment 
+has a continuous action space. This forced us to move to policy-gradient methods. 
+Among the available options (A2C, TRPO, PPO, DDPG), PPO was selected because 
+it is the most widely recommended algorithm for continuous control and is 
+natively supported by Stable-Baselines3. When early training sessions on 
+Colab produced no checkpoint files, we diagnosed the problem through 
+systematic inspection of the logs: the training was terminating before 
+reaching the first checkpoint. We responded by reducing the \texttt{save\_freq} 
+from 1\,000\,000 to 200\,000 steps, which resolved the issue. This experience 
+taught us to always verify that a system produces its expected outputs 
+\textit{early} in a run, not just at the end.
+
+\bigskip
+\noindent\textbf{Challenges Encountered.}
+The two most significant challenges were hardware limitations and environment 
+configuration. Our local machine's AMD Radeon integrated GPU is not compatible 
+with PyTorch's CUDA backend, making local GPU training impossible. We initially 
+attempted local training on CPU, but MuJoCo's physics simulation is 
+computationally expensive and training speed was insufficient for meaningful 
+results. Migrating to Google Colab resolved the GPU problem but introduced 
+session timeout issues: Colab's free tier disconnects after approximately 
+90 minutes of inactivity and limits sessions to 3 hours 50 minutes. 
+The anti-disconnection JavaScript script and the \texttt{CheckpointCallback} 
+were engineering responses to these constraints. A second challenge was the 
+pickling error caused by the custom reward wrapper: Stable-Baselines3's 
+multiprocessing requires all objects to be serialisable with cloudpickle, 
+and our \texttt{SoccerRewardShapingWrapper} initially failed. We resolved 
+this by implementing a custom \texttt{\_\_reduce\_\_} method.
+
+\bigskip
+\noindent\textbf{What We Would Do Differently.}
+If we were to start this project again, we would begin with a short integration 
+test — a 1\,000-step training run — before committing to a full training 
+session. This would have identified the checkpoint and serialisation bugs 
+much earlier. We would also set up TensorBoard monitoring from the very first 
+run, which provides a real-time view of whether the agent is actually learning, 
+rather than waiting for a full training session to conclude before inspecting 
+the results. Finally, we would spend more time on reward coefficient 
+sensitivity analysis before the main training run.
+
+\bigskip
+\noindent\textbf{Impact on Future Development.}
+This project has deepened our appreciation for the gap between reading about 
+an algorithm and actually implementing it in a real system. The engineering 
+challenges — serialisation, multiprocessing, cloud infrastructure, reward 
+engineering — are as important as the mathematical theory, and they are 
+rarely discussed in textbooks. We now feel equipped to approach future 
+multi-agent RL projects with a more structured experimental methodology: 
+start small, verify early, monitor continuously, and iterate. The field of 
+multi-agent deep reinforcement learning remains an open research area with 
+many unsolved problems, and this project has given us a foundation from which 
+to explore it further.
+
+% ================================================================
+\section{Summary}
+\label{sec:reflection_summary}
+% ================================================================
+
+This chapter provided a personal reflection on the project experience, covering 
+the skills and knowledge developed, the decision-making approach adopted, the 
+challenges encountered, and the lessons learned. It concludes the main body 
+of this report. The References section follows, listing all sources cited 
+throughout this work.
+
+\bigskip
+\noindent\textbf{Note on References vs.\ Bibliography:} The next section is 
+``References,'' which will be automatically generated by Bib\TeX. A ``References'' 
+list contains only the sources cited in the report, whereas a ``Bibliography'' 
+also includes sources read but not cited. This report uses ``References'' only.

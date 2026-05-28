@@ -1,0 +1,153 @@
+\chapter{Introduction}
+\label{ch:into}
+
+This chapter presents the project context and objectives. It describes the problem
+being investigated, outlines the aims and objectives, and summarises the solution
+approach and project management plan.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Project Presentation}
+\label{sec:proj_pres}
+
+\subsection{Background}
+\label{sec:into_back}
+
+Reinforcement Learning (RL) has emerged as one of the most promising paradigms 
+in artificial intelligence, enabling autonomous systems to learn complex 
+behaviours from raw experience without explicit programming. Landmark achievements 
+such as DeepMind's AlphaGo~\citep{silver2016mastering}, and the DRL agent 
+playing Atari games at superhuman level~\citep{mnih2015humanlevel}, have 
+demonstrated that RL agents can master tasks previously thought to require 
+human intuition.
+
+Multi-agent reinforcement learning (MARL) extends these ideas to environments 
+where multiple agents learn simultaneously, introducing additional challenges 
+such as non-stationarity, coordination, and emergent competition. The MuJoCo 
+physics engine~\citep{tassa2020dmcontrol} provides a high-fidelity simulation 
+platform for continuous control tasks, widely adopted as a benchmark in the 
+research community.
+
+This project applies state-of-the-art DRL techniques to a 2-versus-2 football 
+simulation in MuJoCo, building progressively from classical Q-Learning to the 
+modern Proximal Policy Optimisation (PPO)~\citep{schulman2017proximal} 
+algorithm, using the PettingZoo~\citep{terry2021pettingzoo} multi-agent 
+interface and the Stable-Baselines3~\citep{raffin2021stablebaselines3} 
+training library.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Problem Statement}
+\label{sec:intro_prob_art}
+
+The core problem investigated in this project is: \textit{How can multiple 
+autonomous agents learn cooperative and competitive behaviours in a physically 
+realistic, continuous-action environment through reinforcement learning alone?}
+
+Specifically, four embodied agents must learn, without any hand-crafted rules 
+or human demonstrations, to:
+\begin{enumerate}
+    \item Navigate a continuous 3D physics space.
+    \item Pursue and make contact with a moving ball.
+    \item Cooperate with a teammate to advance the ball.
+    \item Score goals against two opposing agents.
+\end{enumerate}
+
+This problem is difficult because rewards are sparse (only a goal scores a 
+meaningful reward), the state space is high-dimensional and continuous, 
+and the presence of multiple simultaneously learning agents makes the 
+environment non-stationary from any individual agent's perspective.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Aims and Objectives}
+\label{sec:intro_aims_obj}
+
+\textbf{Aim:} To design, implement, and evaluate a multi-agent deep reinforcement 
+learning system capable of training autonomous soccer-playing agents in a 
+physics-based simulation, demonstrating the progression from foundational RL 
+algorithms to state-of-the-art policy optimisation methods.
+
+\textbf{Objectives:}
+\begin{enumerate}
+    \item \textbf{O1} — Implement and evaluate the Q-Learning algorithm on a 
+    discrete gridworld environment (FrozenLake-v1) to demonstrate the Bellman 
+    equation and epsilon-greedy exploration, as studied in the course.
+    
+    \item \textbf{O2} — Implement and evaluate a Deep Q-Network (DQN) with 
+    experience replay and a target network on CartPole-v1, to demonstrate 
+    function approximation and the key innovations of DRL over tabular methods.
+    
+    \item \textbf{O3} — Configure and deploy the MuJoCo Soccer 2v2 multi-agent 
+    environment using the Shimmy and PettingZoo frameworks, with custom reward 
+    shaping to guide agent behaviour.
+    
+    \item \textbf{O4} — Train a shared PPO policy on the soccer environment 
+    using the parameter-sharing paradigm and evaluate agent performance through 
+    statistical analysis and visualisation.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Solution Approach}
+\label{sec:intro_sol}
+
+The solution follows a three-stage pipeline:
+
+\begin{enumerate}
+    \item \textbf{Stage 1 — Tabular RL:} Q-Learning is applied to FrozenLake-v1 
+    as a baseline demonstration of the Bellman update, epsilon-greedy policy, 
+    and Q-table convergence.
+    
+    \item \textbf{Stage 2 — Deep RL:} A DQN agent is implemented from scratch 
+    using PyTorch, incorporating an experience replay buffer and a periodically 
+    updated target network, applied to CartPole-v1.
+    
+    \item \textbf{Stage 3 — Multi-Agent DRL:} PPO with parameter sharing is 
+    applied to the MuJoCo Soccer 2v2 environment. A custom reward shaping wrapper 
+    augments the sparse reward signal with distance penalties and velocity 
+    incentives to accelerate learning. Training is performed on Google Colab 
+    with automatic checkpoint saving to Google Drive.
+\end{enumerate}
+
+% ================================================================
+\section{Project Management}
+\label{sec:proj_mgmt}
+% ================================================================
+
+The project was structured over a period of approximately three weeks, following 
+the timeline summarised in Table~\ref{tab:gantt}.
+
+\begin{table}[!ht]
+    \centering
+    \caption{Project management timeline}
+    \label{tab:gantt}
+    \begin{tabular}{lp{5cm}c}
+        \toprule
+        \textbf{Phase} & \textbf{Tasks} & \textbf{Duration} \\
+        \midrule
+        1. Setup         & Environment installation, MuJoCo configuration, 
+                           dependency management & Week 1 \\
+        2. Foundations   & Q-Learning demo (FrozenLake), DQN demo (CartPole), 
+                           course material review & Week 1--2 \\
+        3. Main project  & Reward shaping design, PPO training pipeline, 
+                           Colab notebook & Week 2 \\
+        4. Training      & GPU training on Google Colab, checkpoint monitoring & Week 2--3 \\
+        5. Evaluation    & Statistical analysis, graph generation, 
+                           result interpretation & Week 3 \\
+        6. Report        & LaTeX report writing and submission & Week 3 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% ================================================================
+\section{Summary}
+\label{sec:intro_summary}
+% ================================================================
+
+In summary, this chapter established the context and objectives of the project.
+The investigated problem --- training multiple autonomous agents to play
+2-versus-2 football in a physics simulation using deep reinforcement learning ---
+was described in detail. Four measurable objectives were defined, and the
+three-stage solution approach was outlined. The project management plan was
+also presented. Chapter~\ref{ch:lit_rev} presents a review of the existing
+literature and course material relevant to this project.

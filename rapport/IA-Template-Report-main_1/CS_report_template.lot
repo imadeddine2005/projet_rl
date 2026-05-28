@@ -1,0 +1,19 @@
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {1.1}{\ignorespaces Project management timeline}}{4}{table.caption.10}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Undergraduate report template structure}}{10}{table.caption.11}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Example of an algorithm analysis type report structure}}{10}{table.caption.12}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Q-Learning hyperparameters on FrozenLake-v1.}}{10}{table.caption.13}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces DQN hyperparameters on CartPole-v1.}}{11}{table.caption.14}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces PPO hyperparameters for MuJoCo Soccer 2v2.}}{13}{table.caption.15}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Q-Learning performance results on FrozenLake-v1.}}{16}{table.caption.17}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces DQN performance results on CartPole-v1.}}{16}{table.caption.19}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces PPO Soccer 2v2 evaluation statistics (10 episodes).}}{17}{table.caption.21}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Summary of results mapped to project objectives.}}{18}{table.caption.22}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {A.1}{\ignorespaces Main Python dependencies used in this project.}}{29}{table.caption.27}%

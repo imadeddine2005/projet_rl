@@ -1,0 +1,118 @@
+\begin{thebibliography}{xx}
+
+\harvarditem{Bellman}{1957}{bellman1957dynamic}
+Bellman, R.  \harvardyearleft 1957\harvardyearright , {\em Dynamic
+  Programming}, Princeton University Press, Princeton, NJ.
+
+\harvarditem[Brockman et~al.]{Brockman, Cheung, Pettersson, Schneider,
+  Schulman, Tang \harvardand\ Zaremba}{2016}{brockman2016openai}
+Brockman, G., Cheung, V., Pettersson, L., Schneider, J., Schulman, J., Tang, J.
+  \harvardand\ Zaremba, W.  \harvardyearleft 2016\harvardyearright , `{OpenAI}
+  {Gym}'.
+
+\harvarditem{{Farama Foundation}}{2022}{shimmy2022}
+{Farama Foundation}  \harvardyearleft 2022\harvardyearright , `Shimmy:
+  Gymnasium and {PettingZoo} wrappers for existing reinforcement learning
+  environments'.
+\newline\harvardurl{https://github.com/Farama-Foundation/Shimmy}
+
+\harvarditem[Gupta et~al.]{Gupta, Egorov \harvardand\
+  Kochenderfer}{2017}{gupta2017cooperative}
+Gupta, J.~K., Egorov, M. \harvardand\ Kochenderfer, M.  \harvardyearleft
+  2017\harvardyearright , Cooperative multi-agent control using deep
+  reinforcement learning, {\em in} `International Conference on Autonomous
+  Agents and Multi-Agent Systems (AAMAS) -- Adaptive Learning Agents Workshop'.
+
+\harvarditem[Lowe et~al.]{Lowe, Wu, Tamar, Harb, Abbeel \harvardand\
+  Mordatch}{2017}{lowe2017multiagent}
+Lowe, R., Wu, Y., Tamar, A., Harb, J., Abbeel, P. \harvardand\ Mordatch, I.
+  \harvardyearleft 2017\harvardyearright , Multi-agent actor-critic for mixed
+  cooperative-competitive environments, {\em in} `Advances in Neural
+  Information Processing Systems (NeurIPS)', Vol.~30.
+
+\harvarditem[Mnih et~al.]{Mnih, Kavukcuoglu, Silver, Rusu, Veness, Bellemare,
+  Graves, Riedmiller, Fidjeland, Ostrovski et~al.}{2015}{mnih2015humanlevel}
+Mnih, V., Kavukcuoglu, K., Silver, D., Rusu, A.~A., Veness, J., Bellemare,
+  M.~G., Graves, A., Riedmiller, M., Fidjeland, A.~K., Ostrovski, G. et~al.
+  \harvardyearleft 2015\harvardyearright , `Human-level control through deep
+  reinforcement learning', {\em Nature} {\bf 518}(7540),~529--533.
+
+\harvarditem[Ng et~al.]{Ng, Harada \harvardand\ Russell}{1999}{ng1999policy}
+Ng, A.~Y., Harada, D. \harvardand\ Russell, S.~J.  \harvardyearleft
+  1999\harvardyearright , Policy invariance under reward transformations:
+  Theory and application to reward shaping, {\em in} `International Conference
+  on Machine Learning (ICML)', pp.~278--287.
+
+\harvarditem[Raffin et~al.]{Raffin, Hill, Gleave, Kanervisto, Ernestus
+  \harvardand\ Dormann}{2021}{raffin2021stablebaselines3}
+Raffin, A., Hill, A., Gleave, A., Kanervisto, A., Ernestus, M. \harvardand\
+  Dormann, N.  \harvardyearleft 2021\harvardyearright , `Stable-{Baselines3}:
+  Reliable reinforcement learning implementations', {\em Journal of Machine
+  Learning Research} {\bf 22}(268),~1--8.
+
+\harvarditem[Schulman et~al.]{Schulman, Wolski, Dhariwal, Radford \harvardand\
+  Klimov}{2017}{schulman2017proximal}
+Schulman, J., Wolski, F., Dhariwal, P., Radford, A. \harvardand\ Klimov, O.
+  \harvardyearleft 2017\harvardyearright , `Proximal policy optimization
+  algorithms', {\em arXiv preprint arXiv:1707.06347} .
+
+\harvarditem[Silver et~al.]{Silver, Huang, Maddison, Guez, Sifre, van~den
+  Driessche, Schrittwieser, Antonoglou, Panneershelvam, Lanctot
+  et~al.}{2016}{silver2016mastering}
+Silver, D., Huang, A., Maddison, C.~J., Guez, A., Sifre, L., van~den Driessche,
+  G., Schrittwieser, J., Antonoglou, I., Panneershelvam, V., Lanctot, M. et~al.
+   \harvardyearleft 2016\harvardyearright , `Mastering the game of {Go} with
+  deep neural networks and tree search', {\em Nature} {\bf 529},~484--489.
+
+\harvarditem{Sutton \harvardand\ Barto}{2018}{sutton2018reinforcement}
+Sutton, R.~S. \harvardand\ Barto, A.~G.  \harvardyearleft 2018\harvardyearright
+  , {\em Reinforcement Learning: An Introduction}, 2nd edn, MIT Press,
+  Cambridge, MA.
+
+\harvarditem[Sutton et~al.]{Sutton, McAllester, Singh \harvardand\
+  Mansour}{1999}{sutton1999policy}
+Sutton, R.~S., McAllester, D., Singh, S. \harvardand\ Mansour, Y.
+  \harvardyearleft 1999\harvardyearright , Policy gradient methods for
+  reinforcement learning with function approximation, {\em in} `Advances in
+  Neural Information Processing Systems (NeurIPS)', Vol.~12.
+
+\harvarditem[Tassa et~al.]{Tassa, Tunyasuvunakool, Muldal, Doron, Liu, Bohez,
+  Merel, Erez, Lillicrap \harvardand\ Heess}{2020}{tassa2020dmcontrol}
+Tassa, Y., Tunyasuvunakool, S., Muldal, A., Doron, Y., Liu, S., Bohez, S.,
+  Merel, J., Erez, T., Lillicrap, T. \harvardand\ Heess, N.  \harvardyearleft
+  2020\harvardyearright , `{dm\_control}: Software package for physics-based
+  simulation and reinforcement learning'.
+\newline\harvardurl{https://github.com/deepmind/dm\_control}
+
+\harvarditem{Terry, Black, Grammel, Jayakumar, Hari, Sullivan, Santos,
+  Dieffendahl, Horsch, Perez-Vicente et~al.}{2021}{terry2021pettingzoo}
+Terry, J.~K., Black, B., Grammel, N., Jayakumar, M., Hari, A., Sullivan, R.,
+  Santos, L.~S., Dieffendahl, C., Horsch, C., Perez-Vicente, R. et~al.
+  \harvardyearleft 2021\harvardyearright , `{PettingZoo}: Gym for multi-agent
+  reinforcement learning', {\em Advances in Neural Information Processing
+  Systems (NeurIPS)} {\bf 34}.
+
+\harvarditem{Terry, Black \harvardand\ Jayakumar}{2021}{supersuit2021}
+Terry, J.~K., Black, B. \harvardand\ Jayakumar, M.  \harvardyearleft
+  2021\harvardyearright , `{SuperSuit}: Simple microwrappers for {RL}
+  environments'.
+\newline\harvardurl{https://github.com/Farama-Foundation/SuperSuit}
+
+\harvarditem{Watkins \harvardand\ Dayan}{1992}{watkins1992qlearning}
+Watkins, C. J. C.~H. \harvardand\ Dayan, P.  \harvardyearleft
+  1992\harvardyearright , `Q-learning', {\em Machine Learning} {\bf
+  8}(3--4),~279--292.
+
+\harvarditem{Williams}{1992}{williams1992reinforce}
+Williams, R.~J.  \harvardyearleft 1992\harvardyearright , `Simple statistical
+  gradient-following algorithms for connectionist reinforcement learning', {\em
+  Machine Learning} {\bf 8}(3--4),~229--256.
+
+\harvarditem[Yu et~al.]{Yu, Velu, Vinitsky, Gao, Wang, Bayen \harvardand\
+  Wu}{2022}{yu2022mappo}
+Yu, C., Velu, A., Vinitsky, E., Gao, J., Wang, Y., Bayen, A. \harvardand\ Wu,
+  Y.  \harvardyearleft 2022\harvardyearright , `The surprising effectiveness of
+  {PPO} in cooperative multi-agent games', {\em Advances in Neural Information
+  Processing Systems (NeurIPS)} {\bf 35},~24611--24624.
+
+\end{thebibliography}

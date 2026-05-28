@@ -1,0 +1,11 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Q-Learning on FrozenLake-v1: (Left) Learning curve showing raw and smoothed episodic reward over 10\,000 training episodes. (Right) Q-table heatmap showing the maximum Q-value per state on the 4×4 grid after training.}}{15}{figure.caption.16}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces DQN learning curve on CartPole-v1. The raw per-episode score (blue, faint) and the exponentially smoothed trend (orange) are shown. The dashed green line at 475 marks the ``solved'' threshold.}}{16}{figure.caption.18}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces PPO Soccer 2v2 evaluation results over 10 episodes. (Left) Total accumulated reward per episode. (Right) Episode duration in simulation steps.}}{17}{figure.caption.20}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

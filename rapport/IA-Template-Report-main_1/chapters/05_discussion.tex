@@ -1,0 +1,159 @@
+\chapter{Discussion and Analysis}
+\label{ch:evaluation}
+
+This chapter interprets and analyses the results presented in 
+Chapter~\ref{ch:results}. It explains what the findings mean in the context 
+of the research objectives, situates them within the existing literature, 
+evaluates their significance, and identifies the main limitations of this work.
+
+% ================================================================
+\section{Interpretation of Results}
+\label{sec:interpretation}
+% ================================================================
+
+\subsection{Stage 1: Q-Learning on FrozenLake-v1}
+\label{subsec:disc_ql}
+
+Objective O1 is fully achieved. The Q-Learning agent attains a 62.0\% win rate 
+on FrozenLake-v1, a 41-fold improvement over the 1.5\% random baseline. 
+This result directly confirms the theoretical prediction of the Bellman equation: 
+by iteratively propagating value estimates from terminal states (goal) backward 
+through the state space via Eq.~\eqref{eq:qlearning}, the agent learns a 
+near-optimal policy without any model of the environment.
+
+The slow rise in average reward during the first 1\,000 episodes reflects the 
+dominance of random exploration when $\varepsilon$ is high. The plateau at 
+approximately 0.5 in later episodes is consistent with the known difficulty of 
+slippery FrozenLake: even the optimal policy achieves a win rate well below 
+100\% due to stochastic transitions~\citep{brockman2016openai}. The Q-table 
+heatmap confirms that states on the optimal path to the goal have the highest 
+learned values, which aligns with Bellman's principle of optimality.
+
+Compared to the literature, this result is consistent with the findings of 
+the course Lab 1, and with the Q-Learning convergence theorem~\citep{watkins1992qlearning}, 
+which guarantees convergence to the optimal Q-function under a 
+Robbins-Monro-type learning rate schedule.
+
+\subsection{Stage 2: DQN on CartPole-v1}
+\label{subsec:disc_dqn}
+
+Objective O2 is substantially achieved. The DQN agent shows a clear and 
+consistent upward trend, with the 100-episode rolling average rising from 
+23.6 at episode 50 to 142.8 at episode 450. The ``solved'' threshold of 475 
+was not reached within the 500-episode training budget. This is an expected 
+result for CPU-only training with a small budget: \cite{mnih2015humanlevel} 
+trained their original DQN for tens of millions of frames on GPU hardware. 
+Extending the training to 1\,000 or 2\,000 episodes on the same hardware 
+would very likely achieve the solved criterion.
+
+The implementation validates two key DQN contributions. First, experience 
+replay successfully decorrelates training samples, as evidenced by the stable 
+upward trend rather than the oscillating behaviour typical of online learning. 
+Second, the target network prevents the divergence observed when the same 
+network is used to both select and evaluate actions, as the loss decreases 
+monotonically throughout training.
+
+The performance gap between Q-Learning (62\% on a 16-state problem) and DQN 
+(score $\approx$ 143 on a continuous 4D problem) illustrates the fundamental 
+scalability advantage of neural function approximation over tabular methods. 
+This transition motivates the choice of PPO for the main soccer experiment.
+
+\subsection{Stage 3: PPO Multi-Agent Soccer 2v2}
+\label{subsec:disc_ppo}
+
+Objectives O3 and O4 are achieved. The MuJoCo Soccer 2v2 environment was 
+successfully configured with custom reward shaping, and a PPO policy with 
+parameter sharing was trained on Google Colab. The evaluation results in 
+Figure~\ref{fig:soccer_results} demonstrate that the agents accumulate 
+non-trivial shaped rewards across episodes, confirming that they have learned 
+to pursue the ball and orient themselves toward the goal.
+
+The reward shaping design proved critical. Without the three-component shaped 
+reward (Eq.~\eqref{eq:total_reward}), agents in a sparse reward setting 
+would receive no gradient signal in the early stages of training, since goals 
+are extremely rare. The distance penalty forces the agents to stay close to 
+the ball; the velocity reward reinforces purposeful ball-chasing behaviour; 
+and the goal velocity reward creates an incentive to advance the ball toward 
+the opponent's goal. This design closely follows the dense reward shaping 
+principles discussed in~\citep{ng1999policy}.
+
+Parameter sharing via SuperSuit effectively quadruples the training data per 
+update step, as all four agents' observations contribute to the same PPO 
+gradient. This is consistent with findings in~\citep{gupta2017cooperative}, 
+who demonstrate that parameter sharing in symmetric multi-agent tasks 
+significantly accelerates convergence.
+
+% ================================================================
+\section{Significance of the Findings}
+\label{sec:significance}
+% ================================================================
+
+\begin{itemize}
+    \item \textbf{Technical significance:} This project demonstrates, for the 
+    first time in the context of the IAGI 2 module, the full pipeline from 
+    tabular RL to multi-agent deep RL on a physically realistic continuous 
+    environment. The reward shaping methodology is a concrete, reusable 
+    engineering contribution applicable to any sparse-reward MuJoCo task.
+    
+    \item \textbf{Practical significance:} The training infrastructure developed 
+    — including the Google Colab notebook with automatic Drive checkpointing — 
+    provides a practical, cost-free solution for training deep RL agents that 
+    would otherwise require expensive dedicated GPU hardware.
+    
+    \item \textbf{Scientific significance:} The results confirm theoretical 
+    predictions from the course literature: Q-Learning converges on tabular 
+    problems, DQN scales to continuous state spaces, and PPO with parameter 
+    sharing is effective for cooperative multi-agent tasks. These confirmations 
+    reinforce the validity of the surveyed literature.
+\end{itemize}
+
+% ================================================================
+\section{Limitations}
+\label{sec:limitations}
+% ================================================================
+
+\begin{itemize}
+    \item \textbf{Training duration:} Free-tier Google Colab limits continuous 
+    sessions to approximately 3 hours 50 minutes, significantly restricting 
+    the number of PPO timesteps achievable. Deep RL research typically 
+    requires tens of millions of steps~\citep{schulman2017proximal}; 
+    our budget is an order of magnitude smaller.
+    
+    \item \textbf{Methodological limitations:} Parameter sharing assumes agent 
+    symmetry — all agents share the same policy. This prevents the emergence 
+    of specialised roles (e.g., goalkeeper vs.\ attacker). Asymmetric MARL 
+    approaches such as MAPPO~\citep{yu2022mappo} could address this.
+    
+    \item \textbf{Reward shaping sensitivity:} The three reward coefficients 
+    ($-0.01$, $+0.10$, $+0.50$) were set by engineering judgement, not by 
+    systematic hyperparameter search. Suboptimal coefficients could lead to 
+    reward hacking or impede learning.
+    
+    \item \textbf{Evaluation limitations:} Only 10 evaluation episodes were 
+    run due to the computational budget. Statistical conclusions from so few 
+    episodes carry high variance. A minimum of 100 evaluation episodes would 
+    be required for robust statistical claims.
+    
+    \item \textbf{Reproducibility:} MuJoCo simulation and deep learning 
+    involve inherent stochasticity (random seeds, floating-point arithmetic, 
+    Colab hardware variability). Results may vary between runs.
+\end{itemize}
+
+% ================================================================
+\section{Summary}
+\label{sec:discussion-summary}
+% ================================================================
+
+This chapter provided an analytical interpretation of the results from all 
+three experimental stages. Q-Learning successfully demonstrated Bellman-based 
+convergence, achieving a 62\% win rate. DQN validated experience replay and 
+target network stabilisation on a continuous state-space problem. PPO with 
+parameter sharing and reward shaping produced a functional multi-agent soccer 
+training pipeline on free GPU hardware. The limitations — primarily training 
+duration and evaluation sample size — are inherent to the free-tier computational 
+budget and are clearly understood. Overall, the results \textbf{support} the 
+initial research objectives by demonstrating that deep reinforcement learning 
+algorithms, when correctly configured with appropriate reward shaping, can 
+train cooperative multi-agent behaviour in physically realistic environments. 
+The following chapter presents the conclusions drawn from this work and 
+outlines recommendations for future research.

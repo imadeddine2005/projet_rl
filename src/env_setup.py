@@ -1,11 +1,12 @@
 import shimmy
+import numpy as np
 from shimmy import DmControlMultiAgentCompatibilityV0
 from pettingzoo.utils.wrappers.base_parallel import BaseParallelWrapper
 
 class SoccerRewardShapingWrapper(BaseParallelWrapper):
     """
-    Custom wrapper to provide shaped rewards based on internal MuJoCo statistics.
-    This encourages the agents to move towards the ball and push it towards the goal.
+    Custom wrapper to provide aggressive shaped rewards.
+    This forces the agents to run towards the ball by applying a distance penalty.
     """
     def __init__(self, env):
         super().__init__(env)
@@ -19,12 +20,25 @@ class SoccerRewardShapingWrapper(BaseParallelWrapper):
         
         for agent in self.possible_agents:
             if not terminations[agent] and not truncations[agent]:
-                # Extract velocity to ball and velocity of ball to goal from observation
+                # Extract statistics
                 vel_to_ball = obs[agent]['stats_vel_to_ball'][0]
                 vel_ball_to_goal = obs[agent]['stats_vel_ball_to_goal'][0]
                 
-                # Add tiny shaped rewards to encourage proactive behavior
-                rewards[agent] += (0.001 * vel_to_ball) + (0.005 * vel_ball_to_goal)
+                # Calculate distance to ball (using X and Y coordinates)
+                ball_pos = obs[agent]['ball_ego_position']
+                dist_to_ball = np.linalg.norm(ball_pos[:2])
+                
+                # Aggressive Reward Shaping
+                # 1. Distance penalty: hurts the agent if it stays far from the ball
+                dist_penalty = -0.01 * dist_to_ball
+                
+                # 2. Velocity reward: huge boost for moving towards the ball
+                vel_reward = 0.1 * vel_to_ball
+                
+                # 3. Goal reward: huge boost for ball moving to opponent goal
+                goal_reward = 0.5 * vel_ball_to_goal
+                
+                rewards[agent] += dist_penalty + vel_reward + goal_reward
                 
         return obs, rewards, terminations, truncations, infos
 

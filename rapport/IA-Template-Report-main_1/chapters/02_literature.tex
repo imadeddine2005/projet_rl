@@ -1,0 +1,235 @@
+\chapter{Literature Review}
+\label{ch:lit_rev}
+
+This chapter reviews the theoretical and algorithmic foundations of reinforcement 
+learning as studied in the course material provided by Prof.\ Hirchoua Badr 
+at ENSAM Casablanca. It situates this project within the current state of the 
+art, identifies the gap that motivates the chosen approach, and demonstrates 
+the significance of applying multi-agent deep reinforcement learning to a 
+physically realistic football environment. The review is organised thematically: 
+Section~\ref{sec:lit_rl_foundations} covers the core RL formalism; 
+Section~\ref{sec:lit_value_based} reviews value-based methods; 
+Section~\ref{sec:lit_policy_based} reviews policy-based and actor-critic methods; 
+Section~\ref{sec:lit_marl} addresses multi-agent RL; 
+Section~\ref{sec:lit_critique} identifies the gap; and 
+Section~\ref{sec:lit_summary} summarises the chapter.
+
+% ================================================================
+\section{Reinforcement Learning Foundations}
+\label{sec:lit_rl_foundations}
+% ================================================================
+
+Reinforcement learning is a computational framework for sequential 
+decision-making under uncertainty~\citep{sutton2018reinforcement}. Unlike 
+supervised learning, which requires labelled input-output pairs, RL relies 
+solely on a reward signal obtained through interaction. The agent observes a 
+state $s_t$, selects an action $a_t$ according to its policy $\pi$, and receives 
+a scalar reward $r_t$ from the environment, transitioning to a new state $s_{t+1}$.
+
+\subsection{Markov Decision Process}
+
+The standard mathematical framework for RL is the Markov Decision Process (MDP), 
+defined by the tuple $(\mathcal{S}, \mathcal{A}, \mathcal{P}, \mathcal{R}, \gamma)$, 
+where $\mathcal{S}$ is the state space, $\mathcal{A}$ is the action space, 
+$\mathcal{P}(s'|s,a)$ is the state transition probability, $\mathcal{R}(s,a)$ 
+is the expected reward, and $\gamma \in [0,1)$ is the discount factor. 
+The Markov property requires that the next state depends only on the current 
+state and action, not on prior history:
+\begin{equation}
+    \mathbb{P}[S_{t+1} \mid S_t] = \mathbb{P}[S_{t+1} \mid S_1, \ldots, S_t].
+    \label{eq:markov}
+\end{equation}
+
+\subsection{Return and Value Functions}
+
+The goal of the agent is to maximise the expected discounted cumulative reward, 
+known as the return:
+\begin{equation}
+    G_t = \sum_{k=0}^{\infty} \gamma^k r_{t+k+1}.
+    \label{eq:return}
+\end{equation}
+
+The state-value function $V^\pi(s)$ and the action-value function $Q^\pi(s,a)$ 
+measure how good it is to be in a given state or to take a given action under 
+policy $\pi$:
+\begin{equation}
+    V^\pi(s) = \mathbb{E}_\pi \left[ G_t \mid S_t = s \right], \quad
+    Q^\pi(s,a) = \mathbb{E}_\pi \left[ G_t \mid S_t = s, A_t = a \right].
+    \label{eq:value_functions}
+\end{equation}
+
+\subsection{The Bellman Equation}
+
+The Bellman equation expresses the recursive relationship at the heart of RL. 
+For the optimal value function~\citep{bellman1957dynamic}:
+\begin{equation}
+    V^*(s) = \max_{a} \left[ \mathcal{R}(s,a) + \gamma \sum_{s'} 
+    \mathcal{P}(s'|s,a) V^*(s') \right].
+    \label{eq:bellman}
+\end{equation}
+This equation underpins all dynamic programming and temporal-difference methods. 
+In the tabular Q-Learning demo (Section~\ref{sec:results_qlearning}), the agent 
+directly applies this principle through iterative table updates.
+
+% ================================================================
+\section{Value-Based Methods}
+\label{sec:lit_value_based}
+% ================================================================
+
+Value-based methods learn an estimate of the action-value function $Q(s,a)$ 
+and derive a policy implicitly by acting greedily with respect to it.
+
+\subsection{Q-Learning}
+
+Q-Learning~\citep{watkins1992qlearning} is an off-policy temporal-difference 
+algorithm that updates the Q-table using the Bellman optimality equation:
+\begin{equation}
+    Q(s,a) \leftarrow Q(s,a) + \alpha 
+    \left[ r + \gamma \max_{a'} Q(s', a') - Q(s,a) \right],
+    \label{eq:qlearning}
+\end{equation}
+where $\alpha$ is the learning rate. Action selection follows the 
+$\varepsilon$-greedy policy: with probability $\varepsilon$ the agent 
+explores randomly, and with probability $1 - \varepsilon$ it exploits 
+the best known action. Q-Learning is guaranteed to converge to the optimal 
+policy under mild conditions~\citep{watkins1992qlearning}. This algorithm 
+was implemented in the \texttt{q\_learning\_demo.py} script on FrozenLake-v1.
+
+\subsection{Deep Q-Network (DQN)}
+
+The key limitation of tabular Q-Learning is its inability to scale to large 
+or continuous state spaces. \cite{mnih2015humanlevel} addressed this by 
+replacing the Q-table with a deep neural network $Q(s,a;\theta)$, parameterised 
+by weights $\theta$. Two critical innovations were introduced:
+
+\begin{itemize}
+    \item \textbf{Experience Replay:} Transitions $(s, a, r, s')$ are stored in 
+    a replay buffer $\mathcal{D}$, and mini-batches are sampled uniformly at 
+    random for training, breaking temporal correlations between consecutive samples.
+    
+    \item \textbf{Target Network:} A separate network $Q(s,a;\theta^-)$ with 
+    frozen weights is used to compute TD targets, improving training stability:
+    \begin{equation}
+        y_i = r + \gamma \max_{a'} Q(s', a'; \theta^-).
+        \label{eq:dqn_target}
+    \end{equation}
+\end{itemize}
+
+The DQN loss is the mean squared error between the online network's prediction 
+and the target:
+\begin{equation}
+    \mathcal{L}(\theta) = \mathbb{E}_{(s,a,r,s') \sim \mathcal{D}} 
+    \left[ \left( y_i - Q(s,a;\theta) \right)^2 \right].
+    \label{eq:dqn_loss}
+\end{equation}
+
+This algorithm was implemented in \texttt{dqn\_demo.py} on CartPole-v1, 
+as covered in Lab 2 of the course.
+
+% ================================================================
+\section{Policy-Based and Actor-Critic Methods}
+\label{sec:lit_policy_based}
+% ================================================================
+
+Value-based methods are limited to discrete action spaces and cannot 
+represent stochastic policies. Policy-based methods directly parameterise 
+the policy $\pi_\theta(a|s)$ and optimise it with respect to the 
+expected return~\citep{sutton1999policy}:
+\begin{equation}
+    J(\pi_\theta) = \mathbb{E}_{\tau \sim \pi_\theta} \left[ R(\tau) \right],
+    \label{eq:policy_objective}
+\end{equation}
+where $\tau = (s_0, a_0, r_1, \ldots)$ is a trajectory.
+
+\subsection{Policy Gradient Theorem and REINFORCE}
+
+The policy gradient theorem~\citep{sutton1999policy} provides an analytical 
+expression for the gradient of $J$ without requiring knowledge of the 
+environment dynamics:
+\begin{equation}
+    \nabla_\theta J(\pi_\theta) = \mathbb{E}_{\tau \sim \pi_\theta} 
+    \left[ \sum_{t=0}^{T} \nabla_\theta \log \pi_\theta(a_t|s_t) \cdot R(\tau) \right].
+    \label{eq:policy_gradient}
+\end{equation}
+The REINFORCE algorithm~\citep{williams1992reinforce} implements this estimator 
+using Monte Carlo rollouts. Its main drawback is high variance, addressed by 
+actor-critic methods.
+
+\subsection{Proximal Policy Optimisation (PPO)}
+
+PPO~\citep{schulman2017proximal} is currently one of the most widely used 
+deep RL algorithms for continuous control. It improves upon earlier methods 
+by constraining policy updates to a trust region, preventing destructively 
+large gradient steps. The PPO clipped objective is:
+\begin{equation}
+    \mathcal{L}^{\text{CLIP}}(\theta) = \mathbb{E}_t \left[ 
+    \min\left( r_t(\theta) \hat{A}_t,\; 
+    \text{clip}(r_t(\theta), 1-\varepsilon, 1+\varepsilon) \hat{A}_t 
+    \right) \right],
+    \label{eq:ppo_clip}
+\end{equation}
+where $r_t(\theta) = \frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_\text{old}}(a_t|s_t)}$ 
+is the probability ratio, $\hat{A}_t$ is the estimated advantage, and 
+$\varepsilon$ is the clipping coefficient. PPO is the algorithm used in 
+the main contribution of this project.
+
+% ================================================================
+\section{Multi-Agent Reinforcement Learning}
+\label{sec:lit_marl}
+% ================================================================
+
+In multi-agent settings, multiple agents learn simultaneously within a shared 
+environment. This introduces non-stationarity: from any single agent's perspective, 
+the environment appears non-Markovian because other agents' policies change 
+during training~\citep{lowe2017multiagent}.
+
+\subsection{Parameter Sharing}
+
+Parameter sharing is an approach where all agents share a single policy 
+network~\citep{gupta2017cooperative}. Each agent observes its own local state 
+and acts independently at execution time, but all agents contribute to the same 
+gradient update during training. This substantially reduces the number of 
+parameters to learn and has been shown to be effective in symmetric multi-agent 
+tasks. In this project, parameter sharing is implemented via SuperSuit's 
+\texttt{concat\_vec\_envs} utility, which treats all agents' observations 
+as independent parallel environments feeding into a single PPO policy.
+
+\subsection{Centralised Training, Decentralised Execution (CTDE)}
+
+The CTDE paradigm~\citep{lowe2017multiagent} allows agents to access global 
+information during training (centralised critic) while acting on local 
+observations during execution (decentralised actors). While MADDPG and MAPPO 
+implement full CTDE, this project uses the simpler parameter-sharing variant 
+as a practical first step toward multi-agent coordination.
+
+% ================================================================
+\section{Critique of the Review}
+\label{sec:lit_critique}
+% ================================================================
+
+The reviewed methods form a clear progression from tabular methods 
+(Q-Learning) to function approximation (DQN) and finally to policy 
+optimisation (PPO). The key gap addressed by this project is the 
+application of these techniques to a continuous, physically realistic, 
+multi-agent environment. Most course examples are restricted to discrete, 
+grid-world environments (FrozenLake, CartPole). Applying PPO to MuJoCo Soccer 2v2 
+represents a significant increase in complexity: the state and action spaces 
+are continuous, the environment involves coupled multi-agent dynamics, and 
+reward signals are naturally sparse. The reward shaping strategy developed 
+in this project (Section~\ref{sec:rw_shaping}) directly addresses the 
+sparse reward gap, a limitation not covered in the existing literature 
+on these specific environments.
+
+% ================================================================
+\section{Summary}
+\label{sec:lit_summary}
+% ================================================================
+
+This chapter reviewed the existing literature relevant to the project, 
+covering the MDP formalism, Bellman equations, Q-Learning, DQN, policy 
+gradients, PPO, and multi-agent RL. The review identified that state-of-the-art 
+algorithms such as PPO, combined with parameter sharing and reward shaping, 
+provide the most appropriate framework for the cooperative and competitive 
+multi-agent football problem investigated here. Chapter~\ref{ch:method} 
+describes the methodology used to apply these algorithms to the MuJoCo 
+Soccer 2v2 environment.
