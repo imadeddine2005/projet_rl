@@ -63,50 +63,33 @@ environment non-stationary from any individual agent's perspective.
 \subsection{Aims and Objectives}
 \label{sec:intro_aims_obj}
 
-\textbf{Aim:} To design, implement, and evaluate a multi-agent deep reinforcement 
-learning system capable of training autonomous soccer-playing agents in a 
-physics-based simulation, demonstrating the progression from foundational RL 
-algorithms to state-of-the-art policy optimisation methods.
+\textbf{Aim:} To design, implement, and evaluate a multi-agent deep reinforcement learning system capable of training autonomous soccer-playing agents in a physics-based 3D simulation using Proximal Policy Optimisation (PPO) with advanced reward shaping and spatial analytics.
 
 \textbf{Objectives:}
 \begin{enumerate}
-    \item \textbf{O1} — Implement and evaluate the Q-Learning algorithm on a 
-    discrete gridworld environment (FrozenLake-v1) to demonstrate the Bellman 
-    equation and epsilon-greedy exploration, as studied in the course.
+    \item \textbf{O1} — Deploy and configure the MuJoCo Soccer 2v2 multi-agent environment using the Shimmy and PettingZoo frameworks, ensuring compatibility with state-of-the-art DRL architectures.
     
-    \item \textbf{O2} — Implement and evaluate a Deep Q-Network (DQN) with 
-    experience replay and a target network on CartPole-v1, to demonstrate 
-    function approximation and the key innovations of DRL over tabular methods.
+    \item \textbf{O2} — Design and formulate an aggressive reward shaping wrapper incorporating distance penalties, teammate coordinates, and goal-directed velocity metrics to mitigate the sparse reward challenge.
     
-    \item \textbf{O3} — Configure and deploy the MuJoCo Soccer 2v2 multi-agent 
-    environment using the Shimmy and PettingZoo frameworks, with custom reward 
-    shaping to guide agent behaviour.
+    \item \textbf{O3} — Train a shared cooperative team policy using PPO and the parameter-sharing paradigm to orchestrate multi-agent coordination.
     
-    \item \textbf{O4} — Train a shared PPO policy on the soccer environment 
-    using the parameter-sharing paradigm and evaluate agent performance through 
-    statistical analysis and visualisation.
+    \item \textbf{O4} — Implement an advanced soccer analytics framework to extract ball possession statistics, teammate spatial coverage heatmaps, and coordinate-based team spreading dynamics.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Solution Approach}
 \label{sec:intro_sol}
 
-The solution follows a three-stage pipeline:
+The solution follows a structured engineering workflow:
 
 \begin{enumerate}
-    \item \textbf{Stage 1 — Tabular RL:} Q-Learning is applied to FrozenLake-v1 
-    as a baseline demonstration of the Bellman update, epsilon-greedy policy, 
-    and Q-table convergence.
+    \item \textbf{Stage 1 — Multi-Agent Environment Architecture:} We wrap the raw MuJoCo 2v2 soccer environment using PettingZoo and Shimmy compatibility layers to establish a standardized parallel interface for vector-env parallelization.
     
-    \item \textbf{Stage 2 — Deep RL:} A DQN agent is implemented from scratch 
-    using PyTorch, incorporating an experience replay buffer and a periodically 
-    updated target network, applied to CartPole-v1.
+    \item \textbf{Stage 2 — Reward Shaping \& Core Logic:} We design a custom `SoccerRewardShapingWrapper` that translates physical states (distances, relative velocities) into immediate shaped dense rewards, guiding agents to pursue the ball and cooperate.
     
-    \item \textbf{Stage 3 — Multi-Agent DRL:} PPO with parameter sharing is 
-    applied to the MuJoCo Soccer 2v2 environment. A custom reward shaping wrapper 
-    augments the sparse reward signal with distance penalties and velocity 
-    incentives to accelerate learning. Training is performed on Google Colab 
-    with automatic checkpoint saving to Google Drive.
+    \item \textbf{Stage 3 — Policy Optimization \& Vectorization:} We deploy a shared MultiInput PPO policy, parallelizing experience gathering over 12 vectorized environments on Google Colab with T4 GPU acceleration.
+    
+    \item \textbf{Stage 4 — Soccer Analytics \& Spatial Heatmaps:} We extract real-world game statistics by simulating the trained policy, computing ball possession percentages, teammate spatial coverage density heatmaps on the pitch, and team spread metrics.
 \end{enumerate}
 
 % ================================================================
@@ -114,8 +97,7 @@ The solution follows a three-stage pipeline:
 \label{sec:proj_mgmt}
 % ================================================================
 
-The project was structured over a period of approximately three weeks, following 
-the timeline summarised in Table~\ref{tab:gantt}.
+The project was structured over a period of approximately three weeks, following the timeline summarised in Table~\ref{tab:gantt}.
 
 \begin{table}[!ht]
     \centering
@@ -125,15 +107,11 @@ the timeline summarised in Table~\ref{tab:gantt}.
         \toprule
         \textbf{Phase} & \textbf{Tasks} & \textbf{Duration} \\
         \midrule
-        1. Setup         & Environment installation, MuJoCo configuration, 
-                           dependency management & Week 1 \\
-        2. Foundations   & Q-Learning demo (FrozenLake), DQN demo (CartPole), 
-                           course material review & Week 1--2 \\
-        3. Main project  & Reward shaping design, PPO training pipeline, 
-                           Colab notebook & Week 2 \\
-        4. Training      & GPU training on Google Colab, checkpoint monitoring & Week 2--3 \\
-        5. Evaluation    & Statistical analysis, graph generation, 
-                           result interpretation & Week 3 \\
+        1. Setup         & Environment installation, MuJoCo configuration, dependency management & Week 1 \\
+        2. Modeling      & Reward shaping formulation, state-action analysis, PPO hyperparameters & Week 1--2 \\
+        3. Main project  & Environment wrappers, training pipeline setup, Colab notebook & Week 2 \\
+        4. Training      & GPU training on Google Colab, automatic checkpoint monitoring & Week 2--3 \\
+        5. Analytics     & Possession analytics, teammate spacing, spatial heatmap generation & Week 3 \\
         6. Report        & LaTeX report writing and submission & Week 3 \\
         \bottomrule
     \end{tabular}

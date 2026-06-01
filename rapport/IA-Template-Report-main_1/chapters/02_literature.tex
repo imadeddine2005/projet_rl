@@ -67,33 +67,24 @@ For the optimal value function~\citep{bellman1957dynamic}:
     \mathcal{P}(s'|s,a) V^*(s') \right].
     \label{eq:bellman}
 \end{equation}
-This equation underpins all dynamic programming and temporal-difference methods. 
-In the tabular Q-Learning demo (Section~\ref{sec:results_qlearning}), the agent 
-directly applies this principle through iterative table updates.
+This equation underpins all dynamic programming and temporal-difference methods, serving as the mathematical base for value estimation in discrete reinforcement learning.
 
 % ================================================================
 \section{Value-Based Methods}
 \label{sec:lit_value_based}
 % ================================================================
 
-Value-based methods learn an estimate of the action-value function $Q(s,a)$ 
-and derive a policy implicitly by acting greedily with respect to it.
+Value-based methods learn an estimate of the action-value function $Q(s,a)$ and derive a policy implicitly by acting greedily with respect to it.
 
 \subsection{Q-Learning}
 
-Q-Learning~\citep{watkins1992qlearning} is an off-policy temporal-difference 
-algorithm that updates the Q-table using the Bellman optimality equation:
+Q-Learning~\citep{watkins1992qlearning} is an off-policy temporal-difference algorithm that updates the Q-table using the Bellman optimality equation:
 \begin{equation}
     Q(s,a) \leftarrow Q(s,a) + \alpha 
     \left[ r + \gamma \max_{a'} Q(s', a') - Q(s,a) \right],
     \label{eq:qlearning}
 \end{equation}
-where $\alpha$ is the learning rate. Action selection follows the 
-$\varepsilon$-greedy policy: with probability $\varepsilon$ the agent 
-explores randomly, and with probability $1 - \varepsilon$ it exploits 
-the best known action. Q-Learning is guaranteed to converge to the optimal 
-policy under mild conditions~\citep{watkins1992qlearning}. This algorithm 
-was implemented in the \texttt{q\_learning\_demo.py} script on FrozenLake-v1.
+where $\alpha$ is the learning rate. Action selection follows the $\varepsilon$-greedy policy: with probability $\varepsilon$ the agent explores randomly, and with probability $1 - \varepsilon$ it exploits the best known action. Q-Learning is guaranteed to converge to the optimal policy under mild conditions~\citep{watkins1992qlearning}.
 
 \subsection{Deep Q-Network (DQN)}
 
@@ -115,16 +106,12 @@ by weights $\theta$. Two critical innovations were introduced:
     \end{equation}
 \end{itemize}
 
-The DQN loss is the mean squared error between the online network's prediction 
-and the target:
+The DQN loss is the mean squared error between the online network's prediction and the target:
 \begin{equation}
     \mathcal{L}(\theta) = \mathbb{E}_{(s,a,r,s') \sim \mathcal{D}} 
     \left[ \left( y_i - Q(s,a;\theta) \right)^2 \right].
     \label{eq:dqn_loss}
 \end{equation}
-
-This algorithm was implemented in \texttt{dqn\_demo.py} on CartPole-v1, 
-as covered in Lab 2 of the course.
 
 % ================================================================
 \section{Policy-Based and Actor-Critic Methods}
@@ -207,18 +194,7 @@ as a practical first step toward multi-agent coordination.
 \label{sec:lit_critique}
 % ================================================================
 
-The reviewed methods form a clear progression from tabular methods 
-(Q-Learning) to function approximation (DQN) and finally to policy 
-optimisation (PPO). The key gap addressed by this project is the 
-application of these techniques to a continuous, physically realistic, 
-multi-agent environment. Most course examples are restricted to discrete, 
-grid-world environments (FrozenLake, CartPole). Applying PPO to MuJoCo Soccer 2v2 
-represents a significant increase in complexity: the state and action spaces 
-are continuous, the environment involves coupled multi-agent dynamics, and 
-reward signals are naturally sparse. The reward shaping strategy developed 
-in this project (Section~\ref{sec:rw_shaping}) directly addresses the 
-sparse reward gap, a limitation not covered in the existing literature 
-on these specific environments.
+The reviewed methods form a clear progression from discrete tabular methods (Q-Learning) to function approximation (DQN) and finally to continuous policy gradient methods (PPO). The key gap addressed by this project is the application of these techniques to a continuous, physically realistic, multi-agent environment like MuJoCo Soccer 2v2. Standard deep RL applications are often restricted to low-dimensional environments with dense rewards. In contrast, MuJoCo Soccer 2v2 represents a massive increase in complexity: state and action spaces are high-dimensional and continuous, agent dynamics are coupled, and game-winning rewards are extremely sparse. The custom reward shaping wrapper and spatial analytics framework designed in this project directly address this gap by establishing immediate learning incentives and rigorous evaluation metrics.
 
 % ================================================================
 \section{Summary}

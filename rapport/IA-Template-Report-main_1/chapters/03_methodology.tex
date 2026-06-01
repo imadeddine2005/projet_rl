@@ -1,206 +1,48 @@
 \chapter{Methodology}
 \label{ch:method}
 
-This chapter describes the methodology adopted to address the research objectives 
-stated in Chapter~\ref{ch:into}. It presents the three experimental stages 
-— Q-Learning, DQN, and PPO multi-agent soccer — detailing the environment 
-design, reward shaping strategy, algorithm configuration, and training setup. 
-Ethical considerations are also addressed.
+This chapter describes the methodology adopted to address the research objectives stated in Chapter~\ref{ch:into}. It details the multi-agent system architecture, environment configuration, custom reward shaping wrapper formulation, PPO shared-policy training pipeline, and the mathematical design of the advanced football analytics and spatial pitch heatmaps.
 
 % ================================================================
-\section{Overall Experimental Design}
+\section{Multi-Agent System Architecture}
 \label{sec:method_design}
 % ================================================================
 
-The methodology follows the algorithm-analysis project type (Table~\ref{tab:algo_temp}), 
-progressing through three algorithmic stages of increasing complexity:
+The methodology is designed to systematically solve cooperative-competitive continuous control on a 3D physical soccer pitch. The architectural flow is structured into four main phases:
 
 \begin{enumerate}
-    \item \textbf{Stage 1:} Q-Learning on FrozenLake-v1 — tabular, 
-    discrete, single-agent.
-    \item \textbf{Stage 2:} DQN on CartPole-v1 — deep, discrete, 
-    single-agent, with neural function approximation.
-    \item \textbf{Stage 3:} PPO on MuJoCo Soccer 2v2 — deep, continuous, 
-    multi-agent, with reward shaping and parameter sharing.
+    \item \textbf{Environment Wrapper Architecture:} Constructing unified parallel wrappers to integrate the physical MuJoCo simulation with Stable-Baselines3.
+    \item \textbf{Custom Reward Shaping Wrapper:} Mitigating sparse rewards using continuous state-dependent shaped rewards.
+    \item \textbf{Cooperative Shared-Policy Training:} Deploying actor-critic Proximal Policy Optimisation (PPO) with parameter sharing.
+    \item \textbf{Soccer Analytics \& Heatmap Visualization:} Processing trajectory states to calculate possession, teammate spacing, and 2D spatial pitch coverage densities.
 \end{enumerate}
 
-Each stage directly maps to an objective (O1–O4) defined in 
-Section~\ref{sec:intro_aims_obj}.
-
-\begin{table}[!ht]
-    \centering
-    \caption{Undergraduate report template structure}
-    \label{tab:gen_template}
-    \begin{tabular}{llll}
-        \toprule
-        \multirow{7}{3cm}{Frontmatter}
-        & & Title Page & \\
-        & & Abstract &    \\
-        & & Acknowledgements & \\
-        & & Table of Contents &    \\
-        & & List of Figures   &    \\
-        & & List of Tables    &    \\
-        & & List of Abbreviations  &    \\
-        & &   &    \\
-        \multirow{7}{3cm}{Main text}
-        & Chapter 1 & Introduction   &    \\
-        & Chapter 2 & Literature Review   &    \\
-        & Chapter 3 & Methodology   &    \\
-        & Chapter 4 & Results    &    \\
-        & Chapter 5 & Discussion and Analysis  &    \\
-        & Chapter 6 & Conclusions and Future Work  &    \\
-        & Chapter 7 & Reflection  &    \\
-        & &   &    \\
-        \multirow{2}{3cm}{End matter}
-        & & References  &    \\
-        & & Appendices (Optional)  &    \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-\begin{table}[!ht]
-    \centering
-    \caption{Example of an algorithm analysis type report structure}
-    \label{tab:algo_temp}
-    \begin{tabular}{lll}
-        \toprule
-        Chapter 1 & Introduction  &    \\
-        Chapter 2 & Literature Review  &    \\
-        Chapter 3 & Methodology   &    \\
-        &               & Algorithms descriptions  \\
-        &               & Implementations   \\
-        &               & Experiments design   \\
-        Chapter 4 & Results       &  \\
-        Chapter 5 & Discussion and Analysis  &    \\
-        Chapter 6 & Conclusion and Future Work  &    \\
-        Chapter 7 & Reflection  &    \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
 % ================================================================
-\section{Stage 1: Q-Learning on FrozenLake}
-\label{sec:method_qlearning}
+\section{MuJoCo Soccer 2v2 Simulation Environment}
+\label{sec:method_soccer_env}
 % ================================================================
 
-\subsection{Environment}
+The experimental environment is the DeepMind Control Suite's multi-agent soccer task~\citep{tassa2020dmcontrol}, accessed via the Shimmy compatibility layer~\citep{shimmy2022} and structured using the PettingZoo parallel API~\citep{terry2021pettingzoo}. The simulation implements a physically realistic 2-versus-2 football match within a continuous 3D arena.
 
-FrozenLake-v1 from the OpenAI Gymnasium library~\citep{brockman2016openai} 
-is a 4×4 grid-world in which an agent must navigate from a starting cell to 
-a goal cell without falling into holes. The surface is slippery, meaning that 
-actions do not deterministically execute: the agent moves in the intended 
-direction with probability 1/3 and in each perpendicular direction with 
-probability 1/3. The observation space contains 16 discrete states, and 
-the action space contains 4 discrete actions (left, down, right, up). 
-A reward of $+1$ is given only upon reaching the goal; all other transitions 
-yield $0$.
+\subsection{Physical and Kinematic Specifications}
+The environment contains four embodied agents (two per team: Red/Home and Blue/Away). The physics dynamics are governed by the MuJoCo engine, which simulates realistic friction, rigid body collisions, joint limits, and momentum. The field dimensions are scaled within continuous coordinates representing approximately $[-12, 12]$ on the longitudinal X-axis (pitch length) and $[-8, 8]$ on the lateral Y-axis (pitch width).
 
-\subsection{Algorithm: Q-Learning with \texorpdfstring{$\varepsilon$}{epsilon}-greedy Exploration}
-
-The Q-Learning update rule (Eq.~\eqref{eq:qlearning}) is applied over 10\,000 
-episodes. The $\varepsilon$-greedy policy starts with $\varepsilon = 1.0$ (full 
-exploration) and decays exponentially toward $\varepsilon_{\min} = 0.01$ 
-with a decay factor of $0.995$ per episode. Hyperparameters are listed in 
-Table~\ref{tab:ql_hyperparams}.
-
-\begin{table}[!ht]
-    \centering
-    \caption{Q-Learning hyperparameters on FrozenLake-v1.}
-    \label{tab:ql_hyperparams}
-    \begin{tabular}{lc}
-        \toprule
-        \textbf{Hyperparameter} & \textbf{Value} \\
-        \midrule
-        Learning rate $\alpha$  & 0.85 \\
-        Discount factor $\gamma$ & 0.95 \\
-        Initial $\varepsilon$ & 1.0 \\
-        Minimum $\varepsilon$ & 0.01 \\
-        $\varepsilon$ decay & 0.995 \\
-        Total episodes & 10\,000 \\
-        Max steps per episode & 100 \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-% ================================================================
-\section{Stage 2: DQN on CartPole}
-\label{sec:method_dqn}
-% ================================================================
-
-\subsection{Environment}
-
-CartPole-v1 from Gymnasium~\citep{brockman2016openai} requires an agent to 
-balance a pole on a moving cart by applying left or right forces. The 
-observation space is a 4-dimensional continuous vector (cart position, cart 
-velocity, pole angle, pole angular velocity). The action space is discrete 
-with 2 actions. A reward of $+1$ is given at each time step the pole 
-remains upright. The episode ends when the pole angle exceeds 12°, the cart 
-moves out of bounds, or 500 steps are reached. The task is considered solved 
-at a rolling average score of 475 or above over 100 episodes.
-
-\subsection{Network Architecture}
-
-The Q-function is approximated by a three-layer MLP:
+\subsection{State and Action Space Formulations}
+The environment features high-dimensional continuous spaces:
 \begin{itemize}
-    \item Input layer: 4 neurons (state dimension)
-    \item Hidden layer 1: 128 neurons, ReLU activation
-    \item Hidden layer 2: 128 neurons, ReLU activation
-    \item Output layer: 2 neurons (one Q-value per action), linear
+    \item \textbf{State Observations}: Each agent receives a local egocentric observation dictionary:
+    \begin{itemize}
+        \item \texttt{ball\_ego\_position}: The relative XY coordinates of the ball in the agent's coordinate system.
+        \item \texttt{stats\_vel\_to\_ball}: The relative scalar velocity of the agent moving toward the ball.
+        \item \texttt{stats\_vel\_ball\_to\_goal}: The velocity of the ball relative to the opponent's goal mouth.
+    \end{itemize}
+    \item \textbf{Action space}: Continuous torques applied directly to the agent's motor joints, enabling fluid movements (running, turning, and kicking).
 \end{itemize}
 
-\subsection{Key DQN Components}
-
-\begin{itemize}
-    \item \textbf{Experience Replay Buffer:} Capacity of 10\,000 transitions. 
-    At each step, the tuple $(s, a, r, s', \text{done})$ is stored. 
-    Mini-batches of 64 transitions are sampled uniformly for each 
-    gradient update, breaking temporal correlations.
-    
-    \item \textbf{Target Network:} A frozen copy of the Q-network is 
-    maintained and used to compute Bellman targets (Eq.~\eqref{eq:dqn_target}). 
-    Its weights are synchronised with the online network every 10 episodes.
-\end{itemize}
-
-Hyperparameters are listed in Table~\ref{tab:dqn_hyperparams}.
-
-\begin{table}[!ht]
-    \centering
-    \caption{DQN hyperparameters on CartPole-v1.}
-    \label{tab:dqn_hyperparams}
-    \begin{tabular}{lc}
-        \toprule
-        \textbf{Hyperparameter} & \textbf{Value} \\
-        \midrule
-        Learning rate $\alpha$  & $1 \times 10^{-3}$ \\
-        Discount factor $\gamma$ & 0.99 \\
-        Replay buffer capacity & 10\,000 \\
-        Mini-batch size & 64 \\
-        Target network update frequency & 10 episodes \\
-        Initial $\varepsilon$ & 1.0 \\
-        Minimum $\varepsilon$ & 0.01 \\
-        $\varepsilon$ decay & 0.995 \\
-        Total training episodes & 500 \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
 % ================================================================
-\section{Stage 3: PPO Multi-Agent Soccer}
+\section{Proximal Policy Optimisation (PPO) with Shared Policies}
 \label{sec:method_ppo}
 % ================================================================
-
-\subsection{Environment: MuJoCo Soccer 2v2}
-
-The main environment is the DeepMind Control Suite's multi-agent soccer 
-task~\citep{tassa2020dmcontrol}, accessed through the Shimmy compatibility 
-layer~\citep{shimmy2022} and the PettingZoo parallel API~\citep{terry2021pettingzoo}. 
-The environment simulates a 2-versus-2 football match in a physically realistic 
-3D arena with four embodied agents. The observation for each agent is a 
-dictionary of continuous vectors including the agent's proprioceptive state, 
-the ball position in ego-centric coordinates (\texttt{ball\_ego\_position}), 
-the ball velocity relative to the goal (\texttt{stats\_vel\_ball\_to\_goal}), 
-and the agent's velocity toward the ball (\texttt{stats\_vel\_to\_ball}). 
-The action space is continuous.
 
 \subsection{Custom Reward Shaping}
 \label{sec:rw_shaping}
@@ -323,11 +165,4 @@ simulations. The following ethical dimensions are nonetheless considered:
 \label{sec:method_summary}
 % ================================================================
 
-This chapter described the full methodology of the project. Three experimental 
-stages were presented: Q-Learning on FrozenLake-v1 to demonstrate foundational 
-RL concepts, DQN on CartPole-v1 to demonstrate deep function approximation, 
-and PPO on MuJoCo Soccer 2v2 as the primary multi-agent contribution. The 
-custom reward shaping strategy, parameter sharing configuration, and Google 
-Colab training infrastructure were detailed. Ethical considerations were 
-addressed. Chapter~\ref{ch:results} presents the results obtained by applying 
-this methodology.
+This chapter described the full methodology of the project. The 2v2 continuous MuJoCo Soccer simulation environment, local egocentric observations, and custom reward shaping formulation were defined. The cooperative shared-policy PPO training pipeline using SuperSuit parameter sharing was detailed. Additionally, the training infrastructure on Google Colab and ethical considerations were documented. Chapter~\ref{ch:results} presents the qualitative and quantitative results obtained by applying this methodology.

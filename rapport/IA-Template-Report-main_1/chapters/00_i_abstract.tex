@@ -1,33 +1,12 @@
 
 \chapter*{\center \Large  Abstract}
 
-This report presents a multi-agent Deep Reinforcement Learning (DRL) system 
-applied to a cooperative and competitive 2-versus-2 football task simulated 
-in the MuJoCo physics engine. The investigated problem is how autonomous agents 
-can learn to coordinate, pursue a ball, and score goals without any hand-crafted 
-rules or human demonstrations. 
+This report presents a Multi-Agent Deep Reinforcement Learning (MADRL) system applied to a cooperative and competitive 2-versus-2 football task simulated in the MuJoCo physics engine. The core problem is how autonomous agents can coordinate, track a ball, and dynamically cooperate to execute goals without hand-crafted rules or human demonstrations.
 
-The methodology follows a three-stage progression grounded in course material: 
-first, Q-Learning with a tabular Q-table is demonstrated on the FrozenLake-v1 
-environment to establish foundational concepts of the Bellman equation and 
-epsilon-greedy exploration; second, a Deep Q-Network (DQN) with experience replay 
-and a target network is implemented on CartPole-v1 to introduce function 
-approximation; third, Proximal Policy Optimisation (PPO) with parameter sharing 
-is applied to the MuJoCo Soccer 2v2 environment as the main contribution. 
-Custom reward shaping is designed and implemented, combining a distance penalty, 
-a velocity-to-ball reward, and a ball-to-goal velocity reward to guide the agents 
-towards productive behaviour. Training is conducted on Google Colab using a T4 GPU 
-and the Stable-Baselines3 library, with automatic checkpointing to Google Drive.
+The methodology focuses on continuous multi-agent control using Proximal Policy Optimisation (PPO) with policy parameter sharing to optimize cooperative coordination. A custom reward shaping wrapper is developed, combining distance-to-ball penalties, ball velocity tracking rewards, and goal-directed incentives to guide player behaviors. For deeper football analysis, we build a spatial analytics framework to extract real-world metrics, including ball possession percentages, teammate spatial coverage heatmaps, and coordinate-based team spreading. Training is executed on Google Colab using a T4 GPU with vectorized environments to parallelize simulation steps.
 
-Results show that the Q-Learning agent achieves a 62\% win rate on FrozenLake 
-compared to a 1.5\% random baseline, and the DQN agent steadily improves its 
-CartPole score from 23 to over 140 steps. The PPO soccer agents demonstrate 
-progressive improvement in their average episodic reward across training. The 
-findings confirm that reward shaping significantly accelerates learning in 
-sparse-reward, physics-based multi-agent environments.
+Results demonstrate that the PPO agents learn active ball-tracking and high-speed interception behaviors. The spatial heatmaps confirm effective territorial coverage, while the possession statistics validate active team coordination. The findings demonstrate that custom reward shaping and structured parameter sharing successfully overcome the sparse reward challenge in physics-based multi-agent cooperative environments.
 
 ~\\[1cm]
 \noindent
-\textbf{Keywords:} Reinforcement Learning, Proximal Policy Optimisation, 
-Multi-Agent Systems, MuJoCo, Deep Q-Network, Reward Shaping, Parameter Sharing, 
-PettingZoo.
+\textbf{Keywords:} Multi-Agent Reinforcement Learning, Proximal Policy Optimisation, Parameter Sharing, Reward Shaping, MuJoCo Physics, Soccer Analytics, Spatial Heatmaps, PettingZoo.

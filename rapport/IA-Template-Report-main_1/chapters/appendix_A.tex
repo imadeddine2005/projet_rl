@@ -1,28 +1,24 @@
 \chapter{Project Source Code Overview}
 \label{appn:A}
 
-This appendix provides a summary of the project's source code structure. 
-The full source code is available in the project repository.
+This appendix provides a summary of the project's source code structure. The full source code is available in the project repository.
 
 \section*{Repository Structure}
 
 \begin{verbatim}
 projet_rl/
 |-- src/
-|   |-- env_setup.py           # MuJoCo environment + reward shaping
+|   |-- env_setup.py           # MuJoCo environment + reward shaping wrapper
 |   |-- train.py               # PPO training pipeline
 |   |-- evaluate.py            # Model evaluation with rendering
-|   |-- demos/
-|   |   |-- q_learning_demo.py # Q-Learning on FrozenLake-v1
-|   |   `-- dqn_demo.py        # DQN on CartPole-v1
+|   |-- soccer_match.py        # Real-time 2v2 match simulator with commentary
 |   `-- utils/
-|       |-- analysis.py        # Statistical evaluation + graphs
-|       `-- plot_training_curves.py  # TensorBoard log plotter
-|-- models/                    # Saved model checkpoints
-|-- results/                   # Generated graphs and figures
-|-- Colab_Training_Notebook.ipynb  # Google Colab training notebook
+|       |-- soccer_analytics.py # Coordinate tracking, possession & spatial hexbins
+|       `-- analysis.py        # Statistical evaluation and trajectory graphing
+|-- results/                   # Generated heatmap and evaluation curves
+|-- Colab_Training_Notebook.ipynb  # Google Colab vectorized training notebook
 |-- requirements.txt           # Python dependencies
-`-- rapport/                   # This LaTeX report
+`-- rapport/                   # LaTeX report
 \end{verbatim}
 
 \section*{Key Dependencies}
@@ -37,12 +33,11 @@ projet_rl/
         \texttt{stable-baselines3} & PPO training framework \\
         \texttt{pettingzoo}        & Multi-agent environment API \\
         \texttt{shimmy}            & DmControl compatibility layer \\
-        \texttt{supersuit}         & Environment vectorisation \\
+        \texttt{supersuit}         & Environment vectorisation and parameter sharing \\
         \texttt{dm\_control}       & MuJoCo physics engine \\
-        \texttt{gymnasium}         & FrozenLake, CartPole environments \\
-        \texttt{torch}             & Deep learning (DQN network) \\
-        \texttt{tensorboard}       & Training curve visualisation \\
-        \texttt{matplotlib}        & Result plotting \\
+        \texttt{torch}             & Deep learning backend for PPO policy networks \\
+        \texttt{tensorboard}       & Training curve monitoring \\
+        \texttt{matplotlib}        & Publication-grade spatial heatmap plotting \\
         \bottomrule
     \end{tabular}
 \end{table}

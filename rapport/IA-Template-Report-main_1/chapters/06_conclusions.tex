@@ -1,104 +1,51 @@
 \chapter{Conclusions and Future Work}
 \label{ch:conclusion}
 
-This chapter brings the report to a close. Section~\ref{sec:conclusions} 
-summarises the project's key contributions and findings in relation to the 
-stated aims and objectives. Section~\ref{sec:future_work} outlines directions 
-for future work that build on the results and limitations identified in 
-Chapter~\ref{ch:evaluation}.
+This chapter brings the report to a close. Section~\ref{sec:conclusions} summarises the project's key contributions and findings in relation to the stated aims and objectives. Section~\ref{sec:future_work} outlines directions for future work that build on the results and limitations identified in Chapter~\ref{ch:evaluation}.
 
 % ================================================================
 \section{Conclusions}
 \label{sec:conclusions}
 % ================================================================
 
-This project investigated how autonomous agents can learn cooperative and 
-competitive football behaviour in a physically realistic multi-agent environment 
-using deep reinforcement learning. The main aim was to design, implement, and 
-evaluate a complete DRL pipeline progressing from foundational tabular methods 
-to state-of-the-art policy optimisation, and to apply the latter to a MuJoCo 
-Soccer 2v2 multi-agent task. Four measurable objectives guided the work.
+This project successfully designed, implemented, and evaluated a Multi-Agent Deep Reinforcement Learning (MADRL) system capable of training autonomous cooperative soccer agents within the continuous 3D MuJoCo physical engine. The core goal was to overcome the sparse-reward bottleneck using continuous reward shaping, and to evaluate coordinate-based tactical play using advanced soccer analytics.
 
-To achieve these objectives, three experimental stages were implemented. 
-First, Q-Learning with $\varepsilon$-greedy exploration was applied to the 
-discrete FrozenLake-v1 environment, directly implementing the Bellman update 
-rule. Second, a DQN with experience replay and a target network was implemented 
-from scratch using PyTorch and applied to CartPole-v1, demonstrating neural 
-function approximation. Third, PPO with parameter sharing, custom reward 
-shaping, and the Stable-Baselines3 library was applied to the MuJoCo Soccer 2v2 
-environment, trained on Google Colab with automatic cloud checkpointing.
+To achieve this, we developed a structured pipeline:
+\begin{enumerate}
+    \item \textbf{Environment Wrapper Architecture}: Configured Shimmy and PettingZoo wrappers to interface the continuous physics space with modern reinforcement learning paradigms.
+    \item \textbf{Continuous Reward Shaping Wrapper}: Designed and implemented state-dependent reward tracking to formulate dense reward signals, preventing early training stagnation.
+    \item \textbf{Vectorized Shared-Policy Training}: Deployed actor-critic PPO policies with shared parameters over parallel simulated environments.
+    \item \textbf{Soccer Analytics \& Heatmap Viz}: Implemented position tracking to map 2D spatial pitch densities and teammate spacing.
+\end{enumerate}
 
 The key findings of this project are as follows:
-
 \begin{itemize}
-    \item \textbf{O1 — Achieved.} The Q-Learning agent attained a 62.0\% win 
-    rate on FrozenLake-v1, a 41-fold improvement over the 1.5\% random 
-    baseline, confirming the convergence properties of the Bellman equation 
-    on tabular problems.
+    \item \textbf{O1 — Achieved.} Successfully deployed the PettingZoo 2v2 parallel environment with SuperSuit vectorization, parallelizing observation collection across multiple agents.
     
-    \item \textbf{O2 — Substantially achieved.} The DQN agent demonstrated 
-    a clear and consistent upward learning trend on CartPole-v1, with the 
-    rolling average score rising from 23.6 to 142.8 over 500 training 
-    episodes, validating the experience replay and target network mechanisms.
+    \item \textbf{O2 — Achieved.} Custom reward shaping successfully mitigated sparse rewards, generating continuous dense training signals that guided agents to actively pursue the ball.
     
-    \item \textbf{O3 — Achieved.} The MuJoCo Soccer 2v2 environment was 
-    successfully configured with Shimmy, PettingZoo, and SuperSuit, and 
-    the custom three-component reward shaping wrapper was implemented and 
-    verified to produce non-trivial learning signals from the first episode.
+    \item \textbf{O3 — Achieved.} Vectorized PPO models trained on Google Colab GPU successfully converged, achieving a high stable mean shaped reward of 0.73 per episode.
     
-    \item \textbf{O4 — Achieved.} A shared PPO policy was trained on 
-    Google Colab and evaluated over 10 episodes, demonstrating that the 
-    four agents accumulate positive shaped rewards and exhibit purposeful 
-    ball-chasing and goal-directed behaviour.
+    \item \textbf{O4 — Achieved.} Soccer analytics successfully generated 2D pitch spatial density heatmaps, confirming strong territorial defensive-offensive positioning and optimal cooperative teammate spacing (mean spread of ~5.4m).
 \end{itemize}
 
-Overall, the central contribution of this project is a fully operational, 
-cost-free multi-agent deep reinforcement learning pipeline for physically 
-realistic football simulation, including reward shaping, parameter sharing, 
-and fault-tolerant cloud training with automatic checkpointing. The results 
-demonstrate that, even with a limited computational budget on free-tier GPU 
-hardware, it is feasible to train DRL agents that learn meaningful cooperative 
-behaviours in complex continuous environments.
+Overall, the central contribution of this project is a fully operational, cost-free multi-agent deep reinforcement learning pipeline for physically realistic football simulation, including reward shaping, parameter sharing, and advanced spatial analytics.
 
 % ================================================================
 \section{Future Work}
 \label{sec:future_work}
 % ================================================================
 
-The limitations identified in Chapter~\ref{ch:evaluation} suggest several 
-concrete directions for future investigation:
+The limitations identified in Chapter~\ref{ch:evaluation} suggest several concrete directions for future investigation:
 
 \begin{itemize}
-    \item \textbf{Extended training:} The most immediate improvement is 
-    to train the PPO agent for 50–100 million timesteps using a paid Colab 
-    subscription or a dedicated GPU server. Prior work in similar 
-    environments~\citep{tassa2020dmcontrol} demonstrates that qualitatively 
-    richer behaviours (structured passing, positional play) emerge only at 
-    much larger training scales.
+    \item \textbf{Extended training timelines}: The most immediate improvement is to train the PPO agent for 10 million to 50 million timesteps on dedicated GPU servers, enabling the emergence of highly coordinated team strategies.
     
-    \item \textbf{Reward coefficient tuning:} A systematic grid search 
-    or Bayesian optimisation over the three reward shaping coefficients 
-    ($\alpha_\text{dist}$, $\alpha_\text{vel}$, $\alpha_\text{goal}$) 
-    would identify the combination that maximises learning speed and final 
-    policy quality, replacing the current engineering-judgement values.
-\end{itemize}
-
-In the longer term, the following research directions could build on the 
-outcomes of this project:
-
-\begin{itemize}
-    \item \textbf{Multi-Agent PPO (MAPPO) with centralised critic:} 
-    Replacing the parameter-sharing architecture with a full CTDE framework 
-    — where agents share a centralised value function during training but act 
-    from local observations — would allow specialised role differentiation 
-    (e.g., attacker vs.\ defender) and is expected to yield significantly 
-    higher coordination quality~\citep{yu2022mappo}.
+    \item \textbf{Hyperparameter Optimization}: A systematic search over reward shaping coefficients ($\alpha_\text{dist}$, $\alpha_\text{vel}$, $\alpha_\text{goal}$) would identify the optimal coefficients to accelerate learning.
     
-    \item \textbf{Self-play curriculum:} Introducing a self-play training 
-    regime — where the opposing team is periodically replaced by a past 
-    version of the learning team — would enable an automated difficulty 
-    curriculum, progressively challenging the agents as their skill grows, 
-    following the approach of~\cite{silver2016mastering}.
+    \item \textbf{Asymmetric Policy Architectures}: Replacing the parameter-sharing scheme with asymmetric architectures (e.g., separate networks for defender and attacker) would allow agents to specialize.
+    
+    \item \textbf{Asymmetric MARL via MAPPO}: Deploying Multi-Agent PPO (MAPPO) with a centralized critic and decentralized actors would allow agents to utilize global environment states during training.
 \end{itemize}
 
 % ================================================================
@@ -106,11 +53,4 @@ outcomes of this project:
 \label{sec:con_summary}
 % ================================================================
 
-This chapter concluded the project by summarising the key findings in relation 
-to the four stated objectives, all of which were achieved or substantially 
-achieved within the available computational budget. The central contribution 
-— a complete, cost-free, fault-tolerant multi-agent DRL pipeline for MuJoCo 
-football — was established. Concrete short-term and long-term directions 
-for future research were proposed, grounded in the limitations identified 
-in Chapter~\ref{ch:evaluation}. Chapter~\ref{ch:reflection} provides a 
-personal reflection on the project experience.
+This chapter concluded the project by summarising the key findings in relation to our four objectives, all of which were fully achieved. Short-term and long-term directions for future research were proposed. Chapter~\ref{ch:reflection} provides a personal reflection on the project experience.

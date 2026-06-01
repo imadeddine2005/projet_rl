@@ -16,7 +16,6 @@ def evaluate_agents(model_path=DEFAULT_MODEL):
         model = PPO.load(model_path)
     except Exception as e:
         print(f"Error loading model: {e}")
-        print("Make sure you have trained a model first by running train.py!")
         return
 
     # Create the environment with rendering enabled

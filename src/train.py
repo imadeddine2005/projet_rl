@@ -17,8 +17,7 @@ def train_agents(total_timesteps=100000, save_path="../models/ppo_soccer_2v2"):
     env = ss.pettingzoo_env_to_vec_env_v1(env)
     
     # We concatenate the environments to share the policy among agents.
-    # OPTIMIZED FOR YOUR RYZEN 7 PRO 4750U: Using 12 parallel environments to utilize 12 threads
-    # out of your 16 available threads. This leaves some resources for your OS.
+    # Parallelize environment execution using multiple CPU cores
     env = ss.concat_vec_envs_v1(env, num_vec_envs=12, num_cpus=12, base_class='stable_baselines3')
     
     print("Environment wrapped for Stable Baselines 3. Starting training...")
@@ -26,7 +25,7 @@ def train_agents(total_timesteps=100000, save_path="../models/ppo_soccer_2v2"):
     # Ensure the models directory exists
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
     
-    # Initialize PPO with Pro Hyperparameters for MuJoCo
+    # Initialize PPO with standard hyperparameters for MuJoCo Continuous Control
     model = PPO(
         "MultiInputPolicy",
         env,
@@ -47,9 +46,7 @@ def train_agents(total_timesteps=100000, save_path="../models/ppo_soccer_2v2"):
     print(f"Model saved successfully to {save_path}.zip")
     
 if __name__ == "__main__":
-    # For local testing, we run a very short training loop (e.g., 2048 timesteps)
-    # We do this because running on CPU is slow.
-    # In Colab (with GPU), you will increase this to 1,000,000+ timesteps.
-    print("--- Local Testing Mode ---")
-    # Using 10,000,000 steps for PRO training on the local GTX 1650 GPU
+    # Local training execution
+    print("--- Starting Local Training ---")
     train_agents(total_timesteps=10000000, save_path="../models/ppo_soccer_2v2_local")
+

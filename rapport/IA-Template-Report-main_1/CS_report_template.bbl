@@ -4,12 +4,6 @@
 Bellman, R.  \harvardyearleft 1957\harvardyearright , {\em Dynamic
   Programming}, Princeton University Press, Princeton, NJ.
 
-\harvarditem[Brockman et~al.]{Brockman, Cheung, Pettersson, Schneider,
-  Schulman, Tang \harvardand\ Zaremba}{2016}{brockman2016openai}
-Brockman, G., Cheung, V., Pettersson, L., Schneider, J., Schulman, J., Tang, J.
-  \harvardand\ Zaremba, W.  \harvardyearleft 2016\harvardyearright , `{OpenAI}
-  {Gym}'.
-
 \harvarditem{{Farama Foundation}}{2022}{shimmy2022}
 {Farama Foundation}  \harvardyearleft 2022\harvardyearright , `Shimmy:
   Gymnasium and {PettingZoo} wrappers for existing reinforcement learning

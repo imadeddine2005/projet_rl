@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.28)  28 MAY 2026 14:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.28)  1 JUN 2026 23:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -713,7 +713,7 @@ Package hyperref Info: Link coloring ON on input line 11.
 \@outlinefile=\write3
 \openout3 = `CS_report_template.out'.
 
-<figures/logo.png, id=267, 595.47469pt x 578.16pt>
+<figures/logo.png, id=243, 595.47469pt x 578.16pt>
 File: figures/logo.png Graphic file (type png)
 <use figures/logo.png>
 Package pdftex.def Info: figures/logo.png  used on input line 21.
@@ -776,36 +776,23 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout4 = `CS_report_template.toc'.
 
 
-[5] (CS_report_template.lof
-LaTeX Font Info:    Trying to load font information for TS1+lmss on input line 
-5.
-
-(C:\Users\pc\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmss.fd
-File: ts1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Overfull \hbox (2.6996pt too wide) in paragraph at lines 5--5
- [][] [][][]\T1/lmss/m/n/10.95 Q-Learning on FrozenLake-v1: (Left) Learn-ing cu
-rve show-ing raw and smoothed 
- []
-
-)
+[5] (CS_report_template.lof)
 \tf@lof=\write5
 \openout5 = `CS_report_template.lof'.
 
  [6
 
-{C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
-(CS_report_template.lot)
+] (CS_report_template.lot)
 \tf@lot=\write6
 \openout6 = `CS_report_template.lot'.
 
- (glossaries.tex [7
+ (glossaries.tex
+[7
 
 ]) [8
 
-]
-(chapters/00_iii_GeneralIntroduction.tex) (chapters/01_introduction.tex
-[1
+] (chapters/00_iii_GeneralIntroduction.tex)
+(chapters/01_introduction.tex [1
 
 
 ]
@@ -821,13 +808,13 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
 [2
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 128--129
+Underfull \hbox (badness 10000) in paragraph at lines 110--110
 []|\T1/lmss/m/n/10.95 Environment in-stal-la-tion,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 130--131
-[]|\T1/lmss/m/n/10.95 Q-Learning demo (Frozen-
+Underfull \hbox (badness 3312) in paragraph at lines 111--111
+[]|\T1/lmss/m/n/10.95 Reward shap-ing for-mu-la-tion,
  []
 
 ) (chapters/02_literature.tex [3] [4]
@@ -835,143 +822,196 @@ Chapter 2.
 [5
 
 {C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 9
-6.
+LaTeX Font Info:    Trying to load font information for TS1+lmss on input line 
+97.
+
+(C:\Users\pc\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmss.fd
+File: ts1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) [6{C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
+81.
 
 (C:\Users\pc\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [6] [7])
+) [7])
 (chapters/03_methodology.tex [8]
 Chapter 3.
 [9
 
-] [10] [11]
-(C:\Users\pc\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+] (C:\Users\pc\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 249.
-
-Overfull \hbox (22.40874pt too wide) in paragraph at lines 263--264
+nput line 91.
+[10]
+Overfull \hbox (22.40874pt too wide) in paragraph at lines 105--106
 \T1/lmss/m/n/10.95 The PPO agent is in-stan-ti-ated via Stable-Baselines3 ([][]
 Raf-fin et al.[][], [][]2021[][]) with a \T1/lmtt/m/n/10.95 MultiInputPolicy
  []
 
-[12]) (chapters/04_results.tex [13] [14]
+) (chapters/04_results.tex [11] [12]
 Chapter 4.
-<figures/q_learning_frozenlake.png, id=633, 973.236pt x 357.7365pt>
-File: figures/q_learning_frozenlake.png Graphic file (type png)
-<use figures/q_learning_frozenlake.png>
-Package pdftex.def Info: figures/q_learning_frozenlake.png  used on input line 
-21.
-(pdftex.def)             Requested size: 390.13472pt x 143.4032pt.
-[15
-
- <./figures/q_learning_frozenlake.png>]
-<figures/dqn_cartpole.png, id=642, 715.473pt x 351.4731pt>
-File: figures/dqn_cartpole.png Graphic file (type png)
-<use figures/dqn_cartpole.png>
-Package pdftex.def Info: figures/dqn_cartpole.png  used on input line 69.
-(pdftex.def)             Requested size: 360.45386pt x 177.07152pt.
- [16 <./figures/dqn_cartpole.png>]
-<figures/football_analysis_results.png, id=650, 932.283pt x 372.1905pt>
+<figures/football_analysis_results.png, id=569, 932.283pt x 372.1905pt>
 File: figures/football_analysis_results.png Graphic file (type png)
 <use figures/football_analysis_results.png>
 Package pdftex.def Info: figures/football_analysis_results.png  used on input l
-ine 116.
-(pdftex.def)             Requested size: 390.13472pt x 155.75102pt.
+ine 24.
+(pdftex.def)             Requested size: 402.85602pt x 160.83388pt.
+[13
 
-Underfull \hbox (badness 10000) in paragraph at lines 154--154
+]
+<figures/soccer_pitch_heatmap.png, id=576, 1149.093pt x 464.2143pt>
+File: figures/soccer_pitch_heatmap.png Graphic file (type png)
+<use figures/soccer_pitch_heatmap.png>
+Package pdftex.def Info: figures/soccer_pitch_heatmap.png  used on input line 4
+4.
+(pdftex.def)             Requested size: 415.5773pt x 167.8891pt.
+ [14 <./figures/football_analysis_results.png> <./figures/soccer_pitch_heatmap.
+png>]
+Underfull \hbox (badness 10000) in paragraph at lines 69--69
 []|\T1/lmss/bx/n/10.95 Method / En-vi-ron-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 156--157
-[]|\T1/lmss/m/n/10.95 O1 ^^V Q-Learning
+Underfull \hbox (badness 2073) in paragraph at lines 72--73
+[]|\T1/lmss/m/n/10.95 Shimmy + Pet-ting-Zoo
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--158
-[]|\T1/lmss/m/n/10.95 Q-Learning on
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 164--165
+Underfull \hbox (badness 10000) in paragraph at lines 73--74
 []|\T1/lmss/m/n/10.95 Environment suc-cess-fully
  []
 
 
-Underfull \hbox (badness 1342) in paragraph at lines 164--165
-\T1/lmss/m/n/10.95 de-ployed with cus-tom re-
+Underfull \hbox (badness 1132) in paragraph at lines 73--74
+\T1/lmss/m/n/10.95 con-fig-ured with 4 par-al-lel
  []
 
 
-Underfull \hbox (badness 2012) in paragraph at lines 165--166
-[]|\T1/lmss/m/n/10.95 O4 ^^V PPO multi-
+Underfull \hbox (badness 3713) in paragraph at lines 75--76
+[]|\T1/lmss/m/n/10.95 Custom wrap-per (Dis-
  []
 
-) (chapters/05_discussion.tex [17 <./figures/football_analysis_results.png>]
-[18]
+
+Underfull \hbox (badness 2261) in paragraph at lines 76--77
+[]|\T1/lmss/m/n/10.95 Overcame sparse re-wards;
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
+[]|\T1/lmss/m/n/10.95 Logged ro-bust play-ing
+ []
+
+
+Underfull \hbox (badness 4266) in paragraph at lines 79--80
+\T1/lmss/m/n/10.95 be-hav-iors; pos-i-tive mean
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 81--82
+[]|\T1/lmss/m/n/10.95 Spatial Track-ing &
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 81--82
+\T1/lmss/m/n/10.95 Hexbin den-sity maps
+ []
+
+
+LaTeX Warning: Reference `ch:discussion' on page 15 undefined on input line 86.
+
+
+) (chapters/05_discussion.tex [15]
 Chapter 5.
+[16
+
+]) (chapters/06_conclusions.tex [17] [18]
+Chapter 6.
 [19
 
-] [20]) (chapters/06_conclusions.tex [21]
-Chapter 6.
-[22
-
-]) (chapters/07_reflection.tex [23]
+]) (chapters/07_reflection.tex [20]
 Chapter 7.
-[24
+[21
 
-]) (CS_report_template.bbl [25] [26
+]) (CS_report_template.bbl [22] [23
 
-]) [27] (chapters/appendix_A.tex
+]) [24] (chapters/appendix_A.tex
 Appendix A.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+Overfull \hbox (12.84341pt too wide) in paragraph at lines 22--22
+[]\T1/lmtt/m/n/10.95 |   |-- env_setup.py           # MuJoCo environment + rewa
+rd shaping wrapper[] 
+ []
 
-) [28
+
+Overfull \hbox (24.34088pt too wide) in paragraph at lines 22--22
+[]\T1/lmtt/m/n/10.95 |   |-- soccer_match.py        # Real-time 2v2 match simul
+ator with commentary[] 
+ []
 
 
-] [29] (CS_report_template.aux)
+Overfull \hbox (53.08455pt too wide) in paragraph at lines 22--22
+[]\T1/lmtt/m/n/10.95 |       |-- soccer_analytics.py # Coordinate tracking, pos
+session & spatial hexbins[] 
+ []
+
+
+Overfull \hbox (30.08961pt too wide) in paragraph at lines 22--22
+[]\T1/lmtt/m/n/10.95 |       `-- analysis.py        # Statistical evaluation an
+d trajectory graphing[] 
+ []
+
+
+Overfull \hbox (24.34088pt too wide) in paragraph at lines 22--22
+[]\T1/lmtt/m/n/10.95 |-- Colab_Training_Notebook.ipynb  # Google Colab vectoriz
+ed training notebook[] 
+ []
+
+) [25
+
+
+] (CS_report_template.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `CS_report_template.out' has not changed.
-(rerunfilecheck)             Checksum: 2642DB573FFAF78D47C00F0B2C1BAAA2;11421.
+(rerunfilecheck)             Checksum: 26519624D59956A8CAB48B5F798F95C8;10851.
  ) 
 Here is how much of TeX's memory you used:
- 19151 strings out of 467870
- 315792 string characters out of 5419807
- 1025874 words of memory out of 5000000
- 47535 multiletter control sequences out of 15000+600000
- 740049 words of font info for 104 fonts, out of 8000000 for 9000
+ 19091 strings out of 467870
+ 314745 string characters out of 5419807
+ 1023825 words of memory out of 5000000
+ 47491 multiletter control sequences out of 15000+600000
+ 730172 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,11n,93p,574b,1338s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,11n,93p,1103b,1338s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cme
 x10.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
 cm/cmmi10.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmmi12.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/publ
-ic/amsfonts/cm/cmmi6.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1
-/public/amsfonts/cm/cmmi8.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/
-type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/
-fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/pc/AppData/Local/Programs/Mi
-KTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/pc/AppData/Local/Progra
-ms/MiKTeX/fonts/type1/public/lm/lmss10.pfb><C:/Users/pc/AppData/Local/Programs/
-MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/pc/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/lm/lmss17.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX
-/fonts/type1/public/lm/lmss8.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fon
-ts/type1/public/lm/lmssbx10.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/font
-s/type1/public/lm/lmsso10.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/
-type1/public/lm/lmsso12.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/ty
-pe1/public/lm/lmsso8.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1
-/public/lm/lmtt10.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/lm/lmtt9.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/public
-/amsfonts/symbols/msbm10.pfb>
-Output written on CS_report_template.pdf (38 pages, 2071019 bytes).
+fonts/cm/cmmi6.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/publi
+c/amsfonts/cm/cmmi8.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/amsfonts/cm/cmsy10.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/
+type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/f
+onts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/pc/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/lm/lmss10.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/lm/lmss12.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/lm/lmss17.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/lm/lmss8.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/typ
+e1/public/lm/lmssbx10.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/lm/lmsso10.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/lm/lmsso12.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/lm/lmsso8.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/publi
+c/lm/lmtt10.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/public/l
+m/lmtt9.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
+nts/symbols/msbm10.pfb>
+Output written on CS_report_template.pdf (34 pages, 2107129 bytes).
 PDF statistics:
- 877 PDF objects out of 1000 (max. 8388607)
- 179 named destinations out of 1000 (max. 500000)
- 549 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 777 PDF objects out of 1000 (max. 8388607)
+ 166 named destinations out of 1000 (max. 500000)
+ 496 words of extra memory for PDF output out of 10000 (max. 10000000)
 
