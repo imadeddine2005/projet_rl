@@ -87,11 +87,21 @@ def run_analysis(model_path=DEFAULT_MODEL, num_episodes=10):
     
     plt.tight_layout()
     
-    # Save the figure
-    save_path = os.path.join(os.path.dirname(__file__), "..", "..", "football_analysis_results.png")
-    plt.savefig(save_path, dpi=300, bbox_inches='tight')
-    print(f"Graph saved successfully to: {os.path.abspath(save_path)}")
-    print("You can include this high-resolution image in your project report!")
+    # Save the figure (both PNG and PDF)
+    results_dir = os.path.join(os.path.dirname(__file__), "..", "..", "results")
+    os.makedirs(results_dir, exist_ok=True)
+    
+    plt.savefig(os.path.join(results_dir, "football_analysis_results.png"), dpi=300, bbox_inches='tight')
+    plt.savefig(os.path.join(results_dir, "football_analysis_results.pdf"), bbox_inches='tight')
+    
+    # Also save in LaTeX figures/ directory if it exists
+    latex_fig_dir = os.path.join(os.path.dirname(__file__), "..", "..", "rapport", "IA-Template-Report-main_1", "figures")
+    if os.path.exists(latex_fig_dir):
+        plt.savefig(os.path.join(latex_fig_dir, "football_analysis_results.png"), dpi=300, bbox_inches='tight')
+        plt.savefig(os.path.join(latex_fig_dir, "football_analysis_results.pdf"), bbox_inches='tight')
+        
+    plt.close()
+    print("Graphs saved successfully to results/ and LaTeX figures/ as PNG and PDF.")
 
 if __name__ == "__main__":
     run_analysis(num_episodes=10)

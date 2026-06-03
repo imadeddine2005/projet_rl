@@ -122,14 +122,22 @@ def generate_soccer_analytics(num_episodes=5):
     
     plt.tight_layout()
     
-    # Save the output figure
+    # Save the output figure (both PNG and PDF)
     save_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'results')
     os.makedirs(save_dir, exist_ok=True)
-    save_path = os.path.join(save_dir, 'soccer_pitch_heatmap.png')
-    plt.savefig(save_path, dpi=300, bbox_inches='tight')
+    
+    plt.savefig(os.path.join(save_dir, 'soccer_pitch_heatmap.png'), dpi=300, bbox_inches='tight')
+    plt.savefig(os.path.join(save_dir, 'soccer_pitch_heatmap.pdf'), bbox_inches='tight')
+    
+    # Also save in LaTeX figures/ directory if it exists
+    latex_fig_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'rapport', 'IA-Template-Report-main_1', 'figures')
+    if os.path.exists(latex_fig_dir):
+        plt.savefig(os.path.join(latex_fig_dir, 'soccer_pitch_heatmap.png'), dpi=300, bbox_inches='tight')
+        plt.savefig(os.path.join(latex_fig_dir, 'soccer_pitch_heatmap.pdf'), bbox_inches='tight')
+        
     plt.close()
     
-    print(f"SUCCESS: Heatmap analysis plot saved to: {os.path.abspath(save_path)}")
+    print(f"SUCCESS: Heatmap analysis plot saved to results/ and LaTeX figures/")
     return red_poss_pct, blue_poss_pct, red_spacing, blue_spacing
 
 if __name__ == "__main__":

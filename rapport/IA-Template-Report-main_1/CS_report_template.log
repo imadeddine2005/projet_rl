@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.28)  2 JUN 2026 00:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.28)  3 JUN 2026 12:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -713,11 +713,11 @@ Package hyperref Info: Link coloring ON on input line 11.
 \@outlinefile=\write3
 \openout3 = `CS_report_template.out'.
 
-<figures/logo.png, id=243, 595.47469pt x 578.16pt>
-File: figures/logo.png Graphic file (type png)
-<use figures/logo.png>
-Package pdftex.def Info: figures/logo.png  used on input line 21.
-(pdftex.def)             Requested size: 142.26378pt x 138.12604pt.
+<figures/logo.pdf, id=243, 793.96625pt x 770.88pt>
+File: figures/logo.pdf Graphic file (type pdf)
+<use figures/logo.pdf>
+Package pdftex.def Info: figures/logo.pdf  used on input line 21.
+(pdftex.def)             Requested size: 142.26378pt x 138.12898pt.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <12> not available
 (Font)              Font shape `T1/lmss/m/sl' tried instead on input line 36.
  [1
@@ -725,7 +725,7 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <12> not available
 
 
 {C:/Users/pc/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/pc/AppD
-ata/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc} <./figures/logo.png>]
+ata/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc} <./figures/logo.pdf>]
 Underfull \hbox (badness 10000) in paragraph at lines 56--59
 
  []
@@ -851,23 +851,23 @@ Raf-fin et al.[][], [][]2021[][]) with a \T1/lmtt/m/n/10.95 MultiInputPolicy
 
 ) (chapters/04_results.tex [11] [12]
 Chapter 4.
-<figures/football_analysis_results.png, id=569, 932.283pt x 372.1905pt>
-File: figures/football_analysis_results.png Graphic file (type png)
-<use figures/football_analysis_results.png>
-Package pdftex.def Info: figures/football_analysis_results.png  used on input l
+<figures/football_analysis_results.pdf, id=569, 2589.675pt x 1033.8625pt>
+File: figures/football_analysis_results.pdf Graphic file (type pdf)
+<use figures/football_analysis_results.pdf>
+Package pdftex.def Info: figures/football_analysis_results.pdf  used on input l
 ine 24.
-(pdftex.def)             Requested size: 402.85602pt x 160.83388pt.
+(pdftex.def)             Requested size: 402.85602pt x 160.83072pt.
 [13
 
 ]
-<figures/soccer_pitch_heatmap.png, id=576, 1149.093pt x 464.2143pt>
-File: figures/soccer_pitch_heatmap.png Graphic file (type png)
-<use figures/soccer_pitch_heatmap.png>
-Package pdftex.def Info: figures/soccer_pitch_heatmap.png  used on input line 4
+<figures/soccer_pitch_heatmap.pdf, id=576, 4787.8875pt x 1934.22626pt>
+File: figures/soccer_pitch_heatmap.pdf Graphic file (type pdf)
+<use figures/soccer_pitch_heatmap.pdf>
+Package pdftex.def Info: figures/soccer_pitch_heatmap.pdf  used on input line 4
 4.
-(pdftex.def)             Requested size: 415.5773pt x 167.8891pt.
- [14 <./figures/football_analysis_results.png> <./figures/soccer_pitch_heatmap.
-png>]
+(pdftex.def)             Requested size: 415.5773pt x 167.87494pt.
+ [14 <./figures/football_analysis_results.pdf> <./figures/soccer_pitch_heatmap.
+pdf>]
 Underfull \hbox (badness 10000) in paragraph at lines 69--69
 []|\T1/lmss/bx/n/10.95 Method / En-vi-ron-
  []
@@ -984,7 +984,7 @@ Package rerunfilecheck Info: File `CS_report_template.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  19091 strings out of 467870
- 314745 string characters out of 5419807
+ 314817 string characters out of 5419807
  1023825 words of memory out of 5000000
  47491 multiletter control sequences out of 15000+600000
  730172 words of font info for 95 fonts, out of 8000000 for 9000
@@ -1009,9 +1009,9 @@ blic/lm/lmsso8.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/publi
 c/lm/lmtt10.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/public/l
 m/lmtt9.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
 nts/symbols/msbm10.pfb>
-Output written on CS_report_template.pdf (34 pages, 2107435 bytes).
+Output written on CS_report_template.pdf (34 pages, 1079165 bytes).
 PDF statistics:
- 777 PDF objects out of 1000 (max. 8388607)
+ 779 PDF objects out of 1000 (max. 8388607)
  166 named destinations out of 1000 (max. 500000)
  496 words of extra memory for PDF output out of 10000 (max. 10000000)
 
