@@ -38,13 +38,13 @@
 \@writefile{toc}{\contentsline {section}{\numberline {1.2}Project Management}{3}{section.1.2}\protected@file@percent }
 \newlabel{sec:proj_mgmt}{{1.2}{3}{Project Management}{section.1.2}{}}
 \newlabel{sec:proj_mgmt@cref}{{[section][2][1]1.2}{[1][3][]3}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.3}Summary}{3}{section.1.3}\protected@file@percent }
+\newlabel{sec:intro_summary}{{1.3}{3}{Summary}{section.1.3}{}}
+\newlabel{sec:intro_summary@cref}{{[section][3][1]1.3}{[1][3][]3}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {1.1}{\ignorespaces Project management timeline}}{4}{table.caption.10}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{tab:gantt}{{1.1}{4}{Project management timeline}{table.caption.10}{}}
 \newlabel{tab:gantt@cref}{{[table][1][1]1.1}{[1][3][]4}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.3}Summary}{4}{section.1.3}\protected@file@percent }
-\newlabel{sec:intro_summary}{{1.3}{4}{Summary}{section.1.3}{}}
-\newlabel{sec:intro_summary@cref}{{[section][3][1]1.3}{[1][3][]4}{}{}{}}
 \citation{sutton2018reinforcement}
 \citation{bellman1957dynamic}
 \@writefile{toc}{\contentsline {chapter}{\numberline {2}Literature Review}{5}{chapter.2}\protected@file@percent }
@@ -63,7 +63,6 @@
 \newlabel{eq:return@cref}{{[equation][2][2]2.2}{[1][5][]5}{}{}{}}
 \newlabel{eq:value_functions}{{2.3}{5}{Return and Value Functions}{equation.2.3}{}}
 \newlabel{eq:value_functions@cref}{{[equation][3][2]2.3}{[1][5][]5}{}{}{}}
-\citation{watkins1992qlearning}
 \citation{watkins1992qlearning}
 \citation{mnih2015humanlevel}
 \citation{sutton1999policy}
@@ -125,7 +124,7 @@
 \newlabel{sec:method_soccer_env@cref}{{[section][2][3]3.2}{[1][9][]9}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Physical and Kinematic Specifications}{9}{subsection.3.2.1}\protected@file@percent }
 \citation{supersuit2021}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}State and Action Space Formulations}{10}{subsection.3.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}State Observation and Action Spaces}{10}{subsection.3.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3.3}Proximal Policy Optimisation (PPO) with Shared Policies}{10}{section.3.3}\protected@file@percent }
 \newlabel{sec:method_ppo}{{3.3}{10}{Proximal Policy Optimisation (PPO) with Shared Policies}{section.3.3}{}}
 \newlabel{sec:method_ppo@cref}{{[section][3][3]3.3}{[1][10][]10}{}{}{}}
@@ -141,10 +140,10 @@
 \newlabel{eq:goal_reward}{{3.4}{10}{Custom Reward Shaping}{equation.3.4}{}}
 \newlabel{eq:goal_reward@cref}{{[equation][4][3]3.4}{[1][10][]10}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Parameter Sharing and Environment Wrapping}{10}{subsection.3.3.2}\protected@file@percent }
-\newlabel{list:env_wrapping}{{3.1}{10}{Environment wrapping for parameter sharing}{lstlisting.3.1}{}}
-\newlabel{list:env_wrapping@cref}{{[listing][1][3]3.1}{[1][10][]10}{}{}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {3.1}{\ignorespaces Environment wrapping for parameter sharing.}}{10}{lstlisting.3.1}\protected@file@percent }
 \citation{raffin2021stablebaselines3}
+\newlabel{list:env_wrapping}{{3.1}{11}{Environment wrapping for parameter sharing}{lstlisting.3.1}{}}
+\newlabel{list:env_wrapping@cref}{{[listing][1][3]3.1}{[1][11][]11}{}{}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3.1}{\ignorespaces Environment wrapping for parameter sharing.}}{11}{lstlisting.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}PPO Hyperparameters}{11}{subsection.3.3.3}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces PPO hyperparameters for MuJoCo Soccer 2v2.}}{11}{table.caption.11}\protected@file@percent }
 \newlabel{tab:ppo_hyperparams}{{3.1}{11}{PPO hyperparameters for MuJoCo Soccer 2v2}{table.caption.11}{}}
@@ -167,23 +166,22 @@
 \@writefile{toc}{\contentsline {section}{\numberline {4.2}Live Match Evaluation Metrics (Objective O3)}{13}{section.4.2}\protected@file@percent }
 \newlabel{sec:results_live_match}{{4.2}{13}{Live Match Evaluation Metrics (Objective O3)}{section.4.2}{}}
 \newlabel{sec:results_live_match@cref}{{[section][2][4]4.2}{[1][13][]13}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces PPO Soccer 2v2 evaluation results over 10 matches. (Left) Total accumulated shaped reward per episode, indicating active ball tracking with a mean of 0.73. (Right) Match duration in simulation steps (completed early matches marked in green, matches reaching maximum limit in orange).}}{14}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:soccer_eval}{{4.1}{14}{PPO Soccer 2v2 evaluation results over 10 matches. (Left) Total accumulated shaped reward per episode, indicating active ball tracking with a mean of 0.73. (Right) Match duration in simulation steps (completed early matches marked in green, matches reaching maximum limit in orange)}{figure.caption.12}{}}
-\newlabel{fig:soccer_eval@cref}{{[figure][1][4]4.1}{[1][13][]14}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces PPO Soccer 2v2 evaluation results over 10 matches. (Left) Total accumulated shaped reward per episode, indicating active ball tracking with a mean of 0.73. (Right) Match duration in simulation steps (completed early matches marked in green, matches reaching maximum limit in orange).}}{13}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:soccer_eval}{{4.1}{13}{PPO Soccer 2v2 evaluation results over 10 matches. (Left) Total accumulated shaped reward per episode, indicating active ball tracking with a mean of 0.73. (Right) Match duration in simulation steps (completed early matches marked in green, matches reaching maximum limit in orange)}{figure.caption.12}{}}
+\newlabel{fig:soccer_eval@cref}{{[figure][1][4]4.1}{[1][13][]13}{}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.3}Spatial Pitch Coverage Density Heatmaps (Objective O4)}{14}{section.4.3}\protected@file@percent }
 \newlabel{sec:results_spatial_heatmap}{{4.3}{14}{Spatial Pitch Coverage Density Heatmaps (Objective O4)}{section.4.3}{}}
-\newlabel{sec:results_spatial_heatmap@cref}{{[section][3][4]4.3}{[1][13][]14}{}{}{}}
+\newlabel{sec:results_spatial_heatmap@cref}{{[section][3][4]4.3}{[1][14][]14}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Multi-Agent RL Soccer Spatial Coverage Heatmap. (Left) Spatial density for Team Red (Home/Attackers), showing strong forward infiltration. (Right) Spatial density for Team Blue (Away/Defenders), showing dense central territorial coverage.}}{14}{figure.caption.13}\protected@file@percent }
 \newlabel{fig:soccer_heatmap}{{4.2}{14}{Multi-Agent RL Soccer Spatial Coverage Heatmap. (Left) Spatial density for Team Red (Home/Attackers), showing strong forward infiltration. (Right) Spatial density for Team Blue (Away/Defenders), showing dense central territorial coverage}{figure.caption.13}{}}
 \newlabel{fig:soccer_heatmap@cref}{{[figure][2][4]4.2}{[1][14][]14}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Summary of Results}{15}{section.4.4}\protected@file@percent }
-\newlabel{sec:results-summary}{{4.4}{15}{Summary of Results}{section.4.4}{}}
-\newlabel{sec:results-summary@cref}{{[section][4][4]4.4}{[1][15][]15}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Summary of Results}{14}{section.4.4}\protected@file@percent }
+\newlabel{sec:results-summary}{{4.4}{14}{Summary of Results}{section.4.4}{}}
+\newlabel{sec:results-summary@cref}{{[section][4][4]4.4}{[1][14][]14}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Summary of results mapped to project objectives.}}{15}{table.caption.14}\protected@file@percent }
 \newlabel{tab:results-summary}{{4.1}{15}{Summary of results mapped to project objectives}{table.caption.14}{}}
-\newlabel{tab:results-summary@cref}{{[table][1][4]4.1}{[1][15][]15}{}{}{}}
+\newlabel{tab:results-summary@cref}{{[table][1][4]4.1}{[1][14][]15}{}{}{}}
 \citation{gupta2017cooperative}
-\citation{ng1999policy}
 \@writefile{toc}{\contentsline {chapter}{\numberline {5}Discussion and Analysis}{16}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -198,10 +196,9 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Effectiveness of Custom Reward Shaping}{16}{subsection.5.1.2}\protected@file@percent }
 \newlabel{subsec:disc_reward_shaping}{{5.1.2}{16}{Effectiveness of Custom Reward Shaping}{subsection.5.1.2}{}}
 \newlabel{subsec:disc_reward_shaping@cref}{{[subsection][2][5,1]5.1.2}{[1][16][]16}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Spatial Coverage Heatmaps and Teammate Spacing Dynamics}{16}{subsection.5.1.3}\protected@file@percent }
-\newlabel{subsec:disc_spatial_analytics}{{5.1.3}{16}{Spatial Coverage Heatmaps and Teammate Spacing Dynamics}{subsection.5.1.3}{}}
-\newlabel{subsec:disc_spatial_analytics@cref}{{[subsection][3][5,1]5.1.3}{[1][16][]16}{}{}{}}
-\citation{yu2022mappo}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Spatial Coverage Heatmaps and Teammate Spacing Dynamics}{17}{subsection.5.1.3}\protected@file@percent }
+\newlabel{subsec:disc_spatial_analytics}{{5.1.3}{17}{Spatial Coverage Heatmaps and Teammate Spacing Dynamics}{subsection.5.1.3}{}}
+\newlabel{subsec:disc_spatial_analytics@cref}{{[subsection][3][5,1]5.1.3}{[1][16][]17}{}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5.2}Significance of the Findings}{17}{section.5.2}\protected@file@percent }
 \newlabel{sec:significance}{{5.2}{17}{Significance of the Findings}{section.5.2}{}}
 \newlabel{sec:significance@cref}{{[section][2][5]5.2}{[1][17][]17}{}{}{}}
@@ -211,52 +208,50 @@
 \@writefile{toc}{\contentsline {section}{\numberline {5.4}Summary}{17}{section.5.4}\protected@file@percent }
 \newlabel{sec:discussion-summary}{{5.4}{17}{Summary}{section.5.4}{}}
 \newlabel{sec:discussion-summary@cref}{{[section][4][5]5.4}{[1][17][]17}{}{}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{19}{chapter.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{18}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ch:conclusion}{{6}{19}{Conclusions and Future Work}{chapter.6}{}}
-\newlabel{ch:conclusion@cref}{{[chapter][6][]6}{[1][19][]19}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}Conclusions}{19}{section.6.1}\protected@file@percent }
-\newlabel{sec:conclusions}{{6.1}{19}{Conclusions}{section.6.1}{}}
-\newlabel{sec:conclusions@cref}{{[section][1][6]6.1}{[1][19][]19}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}Future Work}{20}{section.6.2}\protected@file@percent }
-\newlabel{sec:future_work}{{6.2}{20}{Future Work}{section.6.2}{}}
-\newlabel{sec:future_work@cref}{{[section][2][6]6.2}{[1][20][]20}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.3}Summary}{20}{section.6.3}\protected@file@percent }
-\newlabel{sec:con_summary}{{6.3}{20}{Summary}{section.6.3}{}}
-\newlabel{sec:con_summary@cref}{{[section][3][6]6.3}{[1][20][]20}{}{}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {7}Reflection}{21}{chapter.7}\protected@file@percent }
+\newlabel{ch:conclusion}{{6}{18}{Conclusions and Future Work}{chapter.6}{}}
+\newlabel{ch:conclusion@cref}{{[chapter][6][]6}{[1][18][]18}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Conclusions}{18}{section.6.1}\protected@file@percent }
+\newlabel{sec:conclusions}{{6.1}{18}{Conclusions}{section.6.1}{}}
+\newlabel{sec:conclusions@cref}{{[section][1][6]6.1}{[1][18][]18}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Future Work}{19}{section.6.2}\protected@file@percent }
+\newlabel{sec:future_work}{{6.2}{19}{Future Work}{section.6.2}{}}
+\newlabel{sec:future_work@cref}{{[section][2][6]6.2}{[1][19][]19}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}Summary}{19}{section.6.3}\protected@file@percent }
+\newlabel{sec:con_summary}{{6.3}{19}{Summary}{section.6.3}{}}
+\newlabel{sec:con_summary@cref}{{[section][3][6]6.3}{[1][19][]19}{}{}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Reflection}{20}{chapter.7}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ch:reflection}{{7}{21}{Reflection}{chapter.7}{}}
-\newlabel{ch:reflection@cref}{{[chapter][7][]7}{[1][21][]21}{}{}{}}
+\newlabel{ch:reflection}{{7}{20}{Reflection}{chapter.7}{}}
+\newlabel{ch:reflection@cref}{{[chapter][7][]7}{[1][20][]20}{}{}{}}
 \bibdata{references}
-\@writefile{toc}{\contentsline {section}{\numberline {7.1}Summary}{22}{section.7.1}\protected@file@percent }
-\newlabel{sec:reflection_summary}{{7.1}{22}{Summary}{section.7.1}{}}
-\newlabel{sec:reflection_summary@cref}{{[section][1][7]7.1}{[1][22][]22}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.1}Summary}{21}{section.7.1}\protected@file@percent }
+\newlabel{sec:reflection_summary}{{7.1}{21}{Summary}{section.7.1}{}}
+\newlabel{sec:reflection_summary@cref}{{[section][1][7]7.1}{[1][21][]21}{}{}{}}
 \bibcite{bellman1957dynamic}{{1}{1957}{{Bellman}}{{}}}
 \bibcite{shimmy2022}{{2}{2022}{{Farama Foundation}}{{}}}
 \bibcite{gupta2017cooperative}{{3}{2017}{{Gupta et~al.}}{{Gupta, Egorov and\ Kochenderfer}}}
 \bibcite{lowe2017multiagent}{{4}{2017}{{Lowe et~al.}}{{Lowe, Wu, Tamar, Harb, Abbeel and\ Mordatch}}}
 \bibcite{mnih2015humanlevel}{{5}{2015}{{Mnih et~al.}}{{Mnih, Kavukcuoglu, Silver, Rusu, Veness, Bellemare, Graves, Riedmiller, Fidjeland, Ostrovski et~al.}}}
-\bibcite{ng1999policy}{{6}{1999}{{Ng et~al.}}{{Ng, Harada and\ Russell}}}
-\bibcite{raffin2021stablebaselines3}{{7}{2021}{{Raffin et~al.}}{{Raffin, Hill, Gleave, Kanervisto, Ernestus and\ Dormann}}}
-\bibcite{schulman2017proximal}{{8}{2017}{{Schulman et~al.}}{{Schulman, Wolski, Dhariwal, Radford and\ Klimov}}}
-\bibcite{silver2016mastering}{{9}{2016}{{Silver et~al.}}{{Silver, Huang, Maddison, Guez, Sifre, van~den Driessche, Schrittwieser, Antonoglou, Panneershelvam, Lanctot et~al.}}}
-\bibcite{sutton2018reinforcement}{{10}{2018}{{Sutton and\ Barto}}{{}}}
-\bibcite{sutton1999policy}{{11}{1999}{{Sutton et~al.}}{{Sutton, McAllester, Singh and\ Mansour}}}
-\bibcite{tassa2020dmcontrol}{{12}{2020}{{Tassa et~al.}}{{Tassa, Tunyasuvunakool, Muldal, Doron, Liu, Bohez, Merel, Erez, Lillicrap and\ Heess}}}
-\bibcite{terry2021pettingzoo}{{13}{2021}{{Terry, Black, Grammel, Jayakumar, Hari, Sullivan, Santos, Dieffendahl, Horsch, Perez-Vicente et~al.}}{{}}}
-\@writefile{toc}{\contentsline {chapter}{References}{23}{chapter*.15}\protected@file@percent }
-\bibcite{supersuit2021}{{14}{2021}{{Terry, Black and\ Jayakumar}}{{}}}
-\bibcite{watkins1992qlearning}{{15}{1992}{{Watkins and\ Dayan}}{{}}}
-\bibcite{williams1992reinforce}{{16}{1992}{{Williams}}{{}}}
-\bibcite{yu2022mappo}{{17}{2022}{{Yu et~al.}}{{Yu, Velu, Vinitsky, Gao, Wang, Bayen and\ Wu}}}
-\@writefile{toc}{\contentsline {chapter}{Appendices}{25}{section*.16}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}Project Source Code Overview}{25}{appendix.1.A}\protected@file@percent }
+\bibcite{raffin2021stablebaselines3}{{6}{2021}{{Raffin et~al.}}{{Raffin, Hill, Gleave, Kanervisto, Ernestus and\ Dormann}}}
+\bibcite{schulman2017proximal}{{7}{2017}{{Schulman et~al.}}{{Schulman, Wolski, Dhariwal, Radford and\ Klimov}}}
+\bibcite{silver2016mastering}{{8}{2016}{{Silver et~al.}}{{Silver, Huang, Maddison, Guez, Sifre, van~den Driessche, Schrittwieser, Antonoglou, Panneershelvam, Lanctot et~al.}}}
+\bibcite{sutton2018reinforcement}{{9}{2018}{{Sutton and\ Barto}}{{}}}
+\bibcite{sutton1999policy}{{10}{1999}{{Sutton et~al.}}{{Sutton, McAllester, Singh and\ Mansour}}}
+\bibcite{tassa2020dmcontrol}{{11}{2020}{{Tassa et~al.}}{{Tassa, Tunyasuvunakool, Muldal, Doron, Liu, Bohez, Merel, Erez, Lillicrap and\ Heess}}}
+\bibcite{terry2021pettingzoo}{{12}{2021}{{Terry, Black, Grammel, Jayakumar, Hari, Sullivan, Santos, Dieffendahl, Horsch, Perez-Vicente et~al.}}{{}}}
+\bibcite{supersuit2021}{{13}{2021}{{Terry, Black and\ Jayakumar}}{{}}}
+\@writefile{toc}{\contentsline {chapter}{References}{22}{chapter*.15}\protected@file@percent }
+\bibcite{watkins1992qlearning}{{14}{1992}{{Watkins and\ Dayan}}{{}}}
+\bibcite{williams1992reinforce}{{15}{1992}{{Williams}}{{}}}
+\@writefile{toc}{\contentsline {chapter}{Appendices}{24}{section*.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Project Source Code Overview}{24}{appendix.1.A}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{appn:A}{{A}{25}{Project Source Code Overview}{appendix.1.A}{}}
-\newlabel{appn:A@cref}{{[chapter][1][]A}{[1][25][]25}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {A.1}{\ignorespaces Main Python dependencies used in this project.}}{25}{table.caption.19}\protected@file@percent }
-\gdef \@abspage@last{34}
+\newlabel{appn:A}{{A}{24}{Project Source Code Overview}{appendix.1.A}{}}
+\newlabel{appn:A@cref}{{[chapter][1][]A}{[1][24][]24}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {A.1}{\ignorespaces Main Python dependencies used in this project.}}{24}{table.caption.19}\protected@file@percent }
+\gdef \@abspage@last{33}

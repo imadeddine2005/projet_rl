@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.28)  3 JUN 2026 12:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.28)  7 JUN 2026 00:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -745,7 +745,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.2 \chapter
+l.1 \chapter
             *{\center \Large  Abstract} [1
 
 ])
@@ -797,24 +797,13 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 ]
 Chapter 1.
-
-Overfull \hbox (0.73909pt too wide) in paragraph at lines 26--32
-\T1/lmss/m/n/10.95 mul-ti-ple agents learn si-mul-ta-ne-ously, in-tro-duc-ing a
-d-di-tional chal-lenges such as non-stationarity,
- []
-
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 46.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 23.
 [2
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 110--110
-[]|\T1/lmss/m/n/10.95 Environment in-stal-la-tion,
- []
-
-
-Underfull \hbox (badness 3312) in paragraph at lines 111--111
-[]|\T1/lmss/m/n/10.95 Reward shap-ing for-mu-la-tion,
+Overfull \hbox (56.69183pt too wide) in paragraph at lines 73--85
+ [][] 
  []
 
 ) (chapters/02_literature.tex [3] [4]
@@ -823,35 +812,42 @@ Chapter 2.
 
 {C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}]
 LaTeX Font Info:    Trying to load font information for TS1+lmss on input line 
-97.
+65.
 
 (C:\Users\pc\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmss.fd
 File: ts1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [6{C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-81.
-
-(C:\Users\pc\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [7])
+) [6{C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}] 
+[7])
 (chapters/03_methodology.tex [8]
 Chapter 3.
 [9
 
-] (C:\Users\pc\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+]
+Overfull \hbox (5.16621pt too wide) in paragraph at lines 33--35
+[]\T1/lmss/bx/n/10.95 Observation Space (Dictionary-based)\T1/lmss/m/n/10.95 : 
+Each agent per-ceives the en-vi-ron-ment through
+ []
+
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
+5.
+(C:\Users\pc\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+(C:\Users\pc\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 91.
 [10]
-Overfull \hbox (22.40874pt too wide) in paragraph at lines 105--106
-\T1/lmss/m/n/10.95 The PPO agent is in-stan-ti-ated via Stable-Baselines3 ([][]
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 74.
+
+Overfull \hbox (24.4015pt too wide) in paragraph at lines 86--87
+\T1/lmss/m/n/10.95 We ini-tial-ize our PPO model us-ing Stable-Baselines3 ([][]
 Raf-fin et al.[][], [][]2021[][]) with a \T1/lmtt/m/n/10.95 MultiInputPolicy
  []
 
 ) (chapters/04_results.tex [11] [12]
 Chapter 4.
-<figures/football_analysis_results.pdf, id=569, 2589.675pt x 1033.8625pt>
+<figures/football_analysis_results.pdf, id=559, 2589.675pt x 1033.8625pt>
 File: figures/football_analysis_results.pdf Graphic file (type pdf)
 <use figures/football_analysis_results.pdf>
 Package pdftex.def Info: figures/football_analysis_results.pdf  used on input l
@@ -859,83 +855,40 @@ ine 24.
 (pdftex.def)             Requested size: 402.85602pt x 160.83072pt.
 [13
 
-]
-<figures/soccer_pitch_heatmap.pdf, id=576, 4787.8875pt x 1934.22626pt>
+ <./figures/football_analysis_results.pdf>]
+<figures/soccer_pitch_heatmap.pdf, id=568, 4787.8875pt x 1934.22626pt>
 File: figures/soccer_pitch_heatmap.pdf Graphic file (type pdf)
 <use figures/soccer_pitch_heatmap.pdf>
 Package pdftex.def Info: figures/soccer_pitch_heatmap.pdf  used on input line 4
 4.
 (pdftex.def)             Requested size: 415.5773pt x 167.87494pt.
- [14 <./figures/football_analysis_results.pdf> <./figures/soccer_pitch_heatmap.
-pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 69--69
-[]|\T1/lmss/bx/n/10.95 Method / En-vi-ron-
+
+Overfull \hbox (229.6395pt too wide) in paragraph at lines 67--85
+ [][] 
  []
 
-
-Underfull \hbox (badness 2073) in paragraph at lines 72--73
-[]|\T1/lmss/m/n/10.95 Shimmy + Pet-ting-Zoo
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 73--74
-[]|\T1/lmss/m/n/10.95 Environment suc-cess-fully
- []
-
-
-Underfull \hbox (badness 1132) in paragraph at lines 73--74
-\T1/lmss/m/n/10.95 con-fig-ured with 4 par-al-lel
- []
-
-
-Underfull \hbox (badness 3713) in paragraph at lines 75--76
-[]|\T1/lmss/m/n/10.95 Custom wrap-per (Dis-
- []
-
-
-Underfull \hbox (badness 2261) in paragraph at lines 76--77
-[]|\T1/lmss/m/n/10.95 Overcame sparse re-wards;
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 79--80
-[]|\T1/lmss/m/n/10.95 Logged ro-bust play-ing
- []
-
-
-Underfull \hbox (badness 4266) in paragraph at lines 79--80
-\T1/lmss/m/n/10.95 be-hav-iors; pos-i-tive mean
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 81--82
-[]|\T1/lmss/m/n/10.95 Spatial Track-ing &
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 81--82
-\T1/lmss/m/n/10.95 Hexbin den-sity maps
- []
-
-
-LaTeX Warning: Reference `ch:discussion' on page 15 undefined on input line 86.
-
-
-) (chapters/05_discussion.tex [15]
+) (chapters/05_discussion.tex [14 <./figures/soccer_pitch_heatmap.pdf>]
+[15]
 Chapter 5.
 [16
 
-]) (chapters/06_conclusions.tex [17] [18]
+]) (chapters/06_conclusions.tex [17]
 Chapter 6.
-[19
+[18
 
-]) (chapters/07_reflection.tex [20]
+]) (chapters/07_reflection.tex [19]
 Chapter 7.
-[21
 
-]) (CS_report_template.bbl [22] [23
+Overfull \hbox (0.13152pt too wide) in paragraph at lines 4--5
+\T1/lmss/m/n/10.95 This chap-ter de-tails our per-sonal re-flec-tions on this e
+n-gi-neer-ing project, dis-cussing our decision-
+ []
 
-]) [24] (chapters/appendix_A.tex
+[20
+
+]) (CS_report_template.bbl [21] [22
+
+]) [23] (chapters/appendix_A.tex
 Appendix A.
 
 Overfull \hbox (12.84341pt too wide) in paragraph at lines 22--22
@@ -967,7 +920,7 @@ Overfull \hbox (24.34088pt too wide) in paragraph at lines 22--22
 ed training notebook[] 
  []
 
-) [25
+) [24
 
 
 ] (CS_report_template.aux)
@@ -975,21 +928,17 @@ ed training notebook[]
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `CS_report_template.out' has not changed.
-(rerunfilecheck)             Checksum: 26519624D59956A8CAB48B5F798F95C8;10851.
+(rerunfilecheck)             Checksum: 928CD14BB3D77C06610547838DC4638E;10851.
  ) 
 Here is how much of TeX's memory you used:
  19091 strings out of 467870
- 314817 string characters out of 5419807
- 1023825 words of memory out of 5000000
- 47491 multiletter control sequences out of 15000+600000
+ 314778 string characters out of 5419807
+ 1022514 words of memory out of 5000000
+ 47490 multiletter control sequences out of 15000+600000
  730172 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,11n,93p,1103b,1338s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,11n,93p,710b,1338s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cme
 x10.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
 cm/cmmi10.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
@@ -1009,9 +958,9 @@ blic/lm/lmsso8.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/publi
 c/lm/lmtt10.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/public/l
 m/lmtt9.pfb><C:/Users/pc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
 nts/symbols/msbm10.pfb>
-Output written on CS_report_template.pdf (34 pages, 1079165 bytes).
+Output written on CS_report_template.pdf (33 pages, 1070800 bytes).
 PDF statistics:
- 779 PDF objects out of 1000 (max. 8388607)
- 166 named destinations out of 1000 (max. 500000)
+ 758 PDF objects out of 1000 (max. 8388607)
+ 167 named destinations out of 1000 (max. 500000)
  496 words of extra memory for PDF output out of 10000 (max. 10000000)
 

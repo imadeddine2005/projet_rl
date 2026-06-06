@@ -31,12 +31,6 @@ Mnih, V., Kavukcuoglu, K., Silver, D., Rusu, A.~A., Veness, J., Bellemare,
   \harvardyearleft 2015\harvardyearright , `Human-level control through deep
   reinforcement learning', {\em Nature} {\bf 518}(7540),~529--533.
 
-\harvarditem[Ng et~al.]{Ng, Harada \harvardand\ Russell}{1999}{ng1999policy}
-Ng, A.~Y., Harada, D. \harvardand\ Russell, S.~J.  \harvardyearleft
-  1999\harvardyearright , Policy invariance under reward transformations:
-  Theory and application to reward shaping, {\em in} `International Conference
-  on Machine Learning (ICML)', pp.~278--287.
-
 \harvarditem[Raffin et~al.]{Raffin, Hill, Gleave, Kanervisto, Ernestus
   \harvardand\ Dormann}{2021}{raffin2021stablebaselines3}
 Raffin, A., Hill, A., Gleave, A., Kanervisto, A., Ernestus, M. \harvardand\
@@ -101,12 +95,5 @@ Watkins, C. J. C.~H. \harvardand\ Dayan, P.  \harvardyearleft
 Williams, R.~J.  \harvardyearleft 1992\harvardyearright , `Simple statistical
   gradient-following algorithms for connectionist reinforcement learning', {\em
   Machine Learning} {\bf 8}(3--4),~229--256.
-
-\harvarditem[Yu et~al.]{Yu, Velu, Vinitsky, Gao, Wang, Bayen \harvardand\
-  Wu}{2022}{yu2022mappo}
-Yu, C., Velu, A., Vinitsky, E., Gao, J., Wang, Y., Bayen, A. \harvardand\ Wu,
-  Y.  \harvardyearleft 2022\harvardyearright , `The surprising effectiveness of
-  {PPO} in cooperative multi-agent games', {\em Advances in Neural Information
-  Processing Systems (NeurIPS)} {\bf 35},~24611--24624.
 
 \end{thebibliography}

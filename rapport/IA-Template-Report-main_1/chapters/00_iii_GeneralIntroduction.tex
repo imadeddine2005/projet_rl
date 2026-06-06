@@ -1,46 +1,20 @@
 \chapter*{General Introduction}
 \label{ch:intoGen}
 
-Reinforcement Learning (RL) is a paradigm of machine learning in which an 
-agent learns optimal behaviour by interacting with an environment, receiving 
-numerical reward signals, and adjusting its decision-making policy over time. 
-Unlike supervised learning, no labelled data is required: the agent discovers 
-useful strategies purely through trial and error. This property makes RL 
-particularly well-suited to problems where the optimal solution is unknown in 
-advance, such as playing games, robotic control, and autonomous navigation.
+In Reinforcement Learning (RL), agents learn how to make decisions by interacting with an environment to maximize numerical rewards. Unlike supervised learning, which relies on static pre-labeled data, the agent explores actions through trial and error. This hands-off mechanism allows RL to discover creative solutions for control and navigation problems where human solutions are difficult to script.
 
-This project investigates how deep reinforcement learning algorithms can be 
-applied to a physically realistic, multi-agent football environment. The 
-environment simulates four embodied agents — two per team — competing in 
-a 2-versus-2 soccer match inside the MuJoCo physics engine. The agents must 
-learn, without any human guidance, to chase the ball, cooperate with their 
-teammate, and score goals against their opponents. This problem is challenging 
-because the state space is continuous and high-dimensional, rewards are sparse, 
-and the presence of multiple simultaneously learning agents makes the 
-environment non-stationary.
+This project explores the deployment of multi-agent reinforcement learning inside a physically realistic 3D soccer simulation. Built on the MuJoCo physics engine, the environment features two teams competing in a 2-versus-2 football match. Without pre-programmed rules, four agents must learn to coordinate, run towards the ball, pass it to teammates, and score. This task is highly complex due to continuous action variables, coupled dynamics, and the non-stationarity that arises when multiple agents update their policies simultaneously.
 
-The report traces the full learning journey: from the theoretical foundations 
-of Q-Learning and the Bellman equation, through the advances introduced by Deep 
-Q-Networks, and finally to the state-of-the-art Proximal Policy Optimisation 
-algorithm used to train the multi-agent soccer system. Both implementation and 
-evaluation are covered in detail, with results demonstrated through learning 
-curves and statistical analysis.
+Our project spans the theoretical foundations of modern RL. We start with discrete environments, covering tabular Q-Learning and Deep Q-Networks (DQN). We then transition to continuous control by implementing Proximal Policy Optimisation (PPO) for the multi-agent soccer task. Beyond training, we analyze the agents' positional strategies and team behavior using spatial tracking metrics.
 
 \section*{Organization of the report}
 \label{sec:intro_org}
 
-This report is organised into seven chapters. 
-Chapter~\ref{ch:into} introduces the host organisation, the problem statement, 
-and the project objectives. 
-Chapter~\ref{ch:lit_rev} reviews the theoretical and algorithmic foundations 
-of reinforcement learning covered in the course. 
-Chapter~\ref{ch:method} describes the methodology, including the environment 
-design, reward shaping strategy, and training configuration. 
-Chapter~\ref{ch:results} presents the quantitative results obtained at each 
-stage of the pipeline. 
-Chapter~\ref{ch:evaluation} provides a critical discussion and analysis of 
-the findings. 
-Chapter~\ref{ch:conclusion} draws conclusions and outlines directions for 
-future work. 
-Chapter~\ref{ch:reflection} reflects on the personal learning experience 
-gained through this project.
+We organize the remainder of this report as follows:
+Chapter~\ref{ch:into} outlines our host organization context at ENSAM Casablanca, the project scope, and specific objectives.
+Chapter~\ref{ch:lit_rev} reviews the mathematical underpinnings of RL, including MDPs, value-based methods, and continuous actor-critic algorithms.
+Chapter~\ref{ch:method} details our methodology, focusing on environment setup, customized reward wrappers, and hyperparameter choices.
+Chapter~\ref{ch:results} details our quantitative evaluations, showing rewards and 2D spatial hexbin heatmaps.
+Chapter~\ref{ch:evaluation} discusses cooperative behaviors, team spreads, and physical limitations.
+Chapter~\ref{ch:conclusion} concludes the project and proposes future directions.
+Chapter~\ref{ch:reflection} shares our personal engineering and learning reflection.

@@ -1,11 +1,10 @@
-
 \chapter*{\center \Large  Abstract}
 
-This report presents a Multi-Agent Deep Reinforcement Learning (MADRL) system applied to a cooperative and competitive 2-versus-2 football task simulated in the MuJoCo physics engine. The core problem is how autonomous agents can coordinate, track a ball, and dynamically cooperate to execute goals without hand-crafted rules or human demonstrations.
+We train and evaluate multi-agent deep reinforcement learning (MADRL) agents on a competitive 2-versus-2 football environment inside the MuJoCo physics engine. Under the PettingZoo interface, we address how autonomous players can learn ball-chasing, defense, and cooperative scoring from raw inputs, bypassing manual rules. 
 
-The methodology focuses on continuous multi-agent control using Proximal Policy Optimisation (PPO) with policy parameter sharing to optimize cooperative coordination. A custom reward shaping wrapper is developed, combining distance-to-ball penalties, ball velocity tracking rewards, and goal-directed incentives to guide player behaviors. For deeper football analysis, we build a spatial analytics framework to extract real-world metrics, including ball possession percentages, teammate spatial coverage heatmaps, and coordinate-based team spreading. Training is executed on Google Colab using a T4 GPU with vectorized environments to parallelize simulation steps.
+Our core methodology utilizes Proximal Policy Optimisation (PPO) combined with agent parameter sharing to handle the continuous state-action spaces. To solve the extreme sparse-reward problem, we implement a custom reward shaping wrapper. This wrapper computes instant feedback using physical parameters like distance-to-ball penalties and goal-bound velocities. Furthermore, we evaluate tactical playing styles through a spatial analytics tool that extracts 2D pitch coverage heatmaps, team spacing (spread), and team possession statistics. Training runs in parallel over vectorized environments on a single Google Colab T4 GPU.
 
-Results demonstrate that the PPO agents learn active ball-tracking and high-speed interception behaviors. The spatial heatmaps confirm effective territorial coverage, while the possession statistics validate active team coordination. The findings demonstrate that custom reward shaping and structured parameter sharing successfully overcome the sparse reward challenge in physics-based multi-agent cooperative environments.
+The results confirm that the shaped PPO agents master high-speed ball interception and team-wide coordination. Spatial hexbin maps show that red and blue teams divide the pitch territory naturally into offensive and defensive zones. Quantitative results indicate a balanced match with 48.6\% and 51.4\% possession for each team respectively. This demonstrates that continuous reward wrappers and weight sharing successfully overcome non-stationarity in physics-based multi-agent setups.
 
 ~\\[1cm]
 \noindent

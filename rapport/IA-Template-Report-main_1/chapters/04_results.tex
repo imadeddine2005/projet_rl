@@ -1,23 +1,23 @@
 \chapter{Results}
 \label{ch:results}
 
-This chapter presents the qualitative and quantitative results obtained by applying the multi-agent reinforcement learning methodology described in Chapter~\ref{ch:method}. The findings are organized according to our key evaluation components: the impact of custom reward shaping, live match evaluation metrics, and spatial pitch coverage density heatmaps. Each result is directly mapped to the research objectives stated in Chapter~\ref{ch:into}.
+This chapter presents our qualitative and quantitative results. We organize our findings into three main areas: the comparison of reward structures during training, offline match metrics, and 2D spatial pitch density maps. We link each result back to our original project objectives.
 
 % ================================================================
 \section{Impact of Custom Reward Shaping (Objectives O1--O2)}
 \label{sec:results_reward_shaping}
 % ================================================================
 
-The multi-agent system was trained for 500,000 steps on Google Colab using a T4 GPU. During training, the custom \texttt{SoccerRewardShapingWrapper} was evaluated against a sparse-reward PPO baseline. 
+We trained our agents for 500,000 steps on Google Colab. During development, we compared our custom \texttt{SoccerRewardShapingWrapper} against a sparse-reward PPO baseline. 
 
-Under the sparse-reward baseline, the PPO policy failed to register any positive gradient updates due to the extreme rarity of goal events (under 0.01\% random occurrence). Conversely, the shaped PPO agent successfully converged, showing a steady logarithmic increase in shaped rewards as agents learned to coordinate, pursue the ball, and advance it towards the opponent's goal mouth.
+Under the sparse baseline, PPO failed to update its policy because agents never scored a goal during random exploration. Conversely, our shaped PPO agent successfully converged. The shaped agent showed a steady logarithmic rise in cumulative reward as the players learned to chase the ball and advance it towards the opponent's goal mouth.
 
 % ================================================================
 \section{Live Match Evaluation Metrics (Objective O3)}
 \label{sec:results_live_match}
 % ================================================================
 
-The trained PPO soccer policy was evaluated over 10 independent match episodes using our analytics framework. Figure~\ref{fig:soccer_eval} shows the accumulated shaped reward per episode alongside the match duration in simulation steps.
+We evaluated our trained policy over 10 independent evaluation matches. Figure~\ref{fig:soccer_eval} plots the cumulative shaped reward alongside the match duration in simulation steps.
 
 \begin{figure}[!ht]
     \centering
@@ -26,10 +26,10 @@ The trained PPO soccer policy was evaluated over 10 independent match episodes u
     \label{fig:soccer_eval}
 \end{figure}
 
-The evaluation results demonstrate highly consistent behaviors:
+The evaluation plots show consistent team behavior:
 \begin{itemize}
-    \item \textbf{Accumulated Shaped Reward}: The team achieves a positive mean shaped reward of \textbf{0.73} per episode. Because the reward function heavily penalizes distance from the ball, this positive mean mathematically proves that the agents maintain extremely tight coverage, constantly tracking and running towards the ball.
-    \item \textbf{Match Duration}: The right panel of Figure~\ref{fig:soccer_eval} indicates that several matches reached the maximum limit of 1500 steps (orange bars), proving physical stability and robust defensive capabilities. Some matches completed early (green bars), representing active out-of-bounds events or goal scoring.
+    \item \textbf{Accumulated Shaped Reward}: The team maintains a positive mean shaped reward of \textbf{0.73} per episode. Since our wrapper penalizes distance from the ball, this positive mean proves that the agents active track the ball throughout the match.
+    \item \textbf{Match Duration}: The right panel of Figure~\ref{fig:soccer_eval} shows that several matches lasted the full 1,500 steps (orange bars), showing physical stability. Other matches ended early (green bars) due to out-of-bounds events or goals.
 \end{itemize}
 
 % ================================================================
@@ -37,7 +37,7 @@ The evaluation results demonstrate highly consistent behaviors:
 \label{sec:results_spatial_heatmap}
 % ================================================================
 
-To analyze the tactical positioning of our multi-agent policy, we extracted coordinate-based spatial density heatmaps over 5,000 game steps. Figure~\ref{fig:soccer_heatmap} illustrates the 2D pitch coverage density for both teams on a standard soccer field.
+To analyze the positioning strategies developed by our policy, we recorded the XY coordinates of all players over 5,000 steps. Figure~\ref{fig:soccer_heatmap} shows the 2D pitch coverage density for both teams.
 
 \begin{figure}[!ht]
     \centering
@@ -46,11 +46,11 @@ To analyze the tactical positioning of our multi-agent policy, we extracted coor
     \label{fig:soccer_heatmap}
 \end{figure}
 
-The spatial distribution reveals key behavioral traits:
+The heatmaps show distinct positioning behaviors:
 \begin{itemize}
-    \item \textbf{Team Red (Attackers)}: Concentrates density in the opposition's half, peaking around coordinates $[-4.0, -1.5]$ and $[-2.0, 2.0]$. This highlights successful forward infiltration and active offensive positioning.
-    \item \textbf{Team Blue (Defenders)}: Demonstrates structured defensive positioning, with high density centered around coordinates $[4.0, 1.5]$ and $[2.0, -2.0]$. This represents tight territorial marking to block goal-bound ball trajectories.
-    \item \textbf{Ball Possession and Spacing}: Quantitative analytics extracted during evaluation show a highly balanced game, with Team Red maintaining **48.6\%** ball possession compared to **51.4\%** for Team Blue. The average teammate spacing (spread) was measured at **5.39m** for Team Red and **5.47m** for Team Blue, indicating optimal cooperative spacing without clustering.
+    \item \textbf{Team Red (Attackers)}: Concentrates density in the opponent's half, peaking around coordinates $[-4.0, -1.5]$ and $[-2.0, 2.0]$. This highlights successful forward infiltration.
+    \item \textbf{Team Blue (Defenders)}: Demonstrates defensive marking, with high density centered around coordinates $[4.0, 1.5]$ and $[2.0, -2.0]$ to block goal-bound trajectories.
+    \item \textbf{Ball Possession and Spacing}: Our analytics script measured an average possession rate of \textbf{48.6\%} for Team Red and \textbf{51.4\%} for Team Blue. The average teammate spacing (spread) was \textbf{5.39m} for Team Red and \textbf{5.47m} for Team Blue, showing that the agents maintain space without clustering.
 \end{itemize}
 
 % ================================================================
@@ -58,16 +58,16 @@ The spatial distribution reveals key behavioral traits:
 \label{sec:results-summary}
 % ================================================================
 
-Table~\ref{tab:results-summary} provides a concise mapping of our multi-agent soccer results to the project objectives.
+Table~\ref{tab:results-summary} maps our experimental results to our project objectives.
 
 \begin{table}[!ht]
     \centering
     \caption{Summary of results mapped to project objectives.}
     \label{tab:results-summary}
-    \begin{tabular}{p{3.5cm} p{4cm} p{4.5cm}}
-        \hline
+    \begin{tabular}{lll}
+        \toprule
         \textbf{Objective} & \textbf{Method / Environment} & \textbf{Key Result} \\
-        \hline
+        \midrule
         O1 — Env Architecture 
             & Shimmy + PettingZoo parallel API 
             & Environment successfully configured with 4 parallel agents. \\
@@ -78,9 +78,10 @@ Table~\ref{tab:results-summary} provides a concise mapping of our multi-agent so
             & Vectorized PPO on T4 GPU 
             & Logged robust playing behaviors; positive mean shaped reward of 0.73. \\
         O4 — Soccer Analytics 
-            & Spatial Tracking \& Hexbin density maps saved; Possession: Red 48.6\% / Blue 51.4\%. \\
-        \hline
+            & Spatial Tracking \& Hexbin density maps 
+            & Saved; Possession: Red 48.6\% / Blue 51.4\%. Spacing: ~5.4m. \\
+        \bottomrule
     \end{tabular}
 \end{table}
 
-The results presented in this chapter are further interpreted and contextualized in Chapter~\ref{ch:discussion}, where we analyze cooperative mechanics and continuous multi-agent dynamics.
+We analyze these cooperative mechanics and continuous multi-agent dynamics further in Chapter~\ref{ch:evaluation}.

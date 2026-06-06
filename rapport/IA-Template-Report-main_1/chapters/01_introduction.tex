@@ -1,12 +1,7 @@
 \chapter{Introduction}
 \label{ch:into}
 
-This chapter presents the project context and objectives. It describes the problem
-being investigated, outlines the aims and objectives, and summarises the solution
-approach and project management plan.
-
-
-
+This chapter introduces our project context, defines the multi-agent challenges we address, and outlines our specific engineering objectives. We also summarize our solution approach and present our project management timeline.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Project Presentation}
@@ -15,81 +10,53 @@ approach and project management plan.
 \subsection{Background}
 \label{sec:into_back}
 
-Reinforcement Learning (RL) has emerged as one of the most promising paradigms 
-in artificial intelligence, enabling autonomous systems to learn complex 
-behaviours from raw experience without explicit programming. Landmark achievements 
-such as DeepMind's AlphaGo~\citep{silver2016mastering}, and the DRL agent 
-playing Atari games at superhuman level~\citep{mnih2015humanlevel}, have 
-demonstrated that RL agents can master tasks previously thought to require 
-human intuition.
+Deep Reinforcement Learning (DRL) represents a significant shift in how we program autonomous agents. Instead of writing manual rules for every situation, we let agents learn from their own interactions within an environment. Well-known successes like AlphaGo~\citep{silver2016mastering} and deep Q-networks playing Atari games~\citep{mnih2015humanlevel} have shown that reinforcement learning can capture strategic intuition that human developers cannot easily write as hard-coded logic.
 
-Multi-agent reinforcement learning (MARL) extends these ideas to environments 
-where multiple agents learn simultaneously, introducing additional challenges 
-such as non-stationarity, coordination, and emergent competition. The MuJoCo 
-physics engine~\citep{tassa2020dmcontrol} provides a high-fidelity simulation 
-platform for continuous control tasks, widely adopted as a benchmark in the 
-research community.
+Multi-agent reinforcement learning (MARL) takes this a step further by putting several learning entities into a shared space. This introduces coordination and competition, but it also creates the problem of non-stationarity, meaning that the environment changes constantly because all players are adapting at the same time. Using the MuJoCo physics engine~\citep{tassa2020dmcontrol}, we can simulate these complex control dynamics in continuous coordinates.
 
-This project applies state-of-the-art DRL techniques to a 2-versus-2 football 
-simulation in MuJoCo, building progressively from classical Q-Learning to the 
-modern Proximal Policy Optimisation (PPO)~\citep{schulman2017proximal} 
-algorithm, using the PettingZoo~\citep{terry2021pettingzoo} multi-agent 
-interface and the Stable-Baselines3~\citep{raffin2021stablebaselines3} 
-training library.
+In this project, we implement a 2-versus-2 soccer simulation under MuJoCo. We build our understanding progressively: we begin with discrete setups using Q-Learning and Deep Q-Networks (DQN), and then we move to continuous policy gradients using Proximal Policy Optimisation (PPO)~\citep{schulman2017proximal}. We use the PettingZoo API~\citep{terry2021pettingzoo} and Stable-Baselines3~\citep{raffin2021stablebaselines3} to implement and train our policy.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Problem Statement}
 \label{sec:intro_prob_art}
 
-The core problem investigated in this project is: \textit{How can multiple 
-autonomous agents learn cooperative and competitive behaviours in a physically 
-realistic, continuous-action environment through reinforcement learning alone?}
+The central question of our work is: \textit{How can we train multiple autonomous agents to cooperate and compete in a continuous-action physics environment using only reinforcement learning?}
 
-Specifically, four embodied agents must learn, without any hand-crafted rules 
-or human demonstrations, to:
+We require four physical agents to learn the following behaviors from scratch:
 \begin{enumerate}
-    \item Navigate a continuous 3D physics space.
-    \item Pursue and make contact with a moving ball.
-    \item Cooperate with a teammate to advance the ball.
-    \item Score goals against two opposing agents.
+    \item Control their joints and navigate the continuous 3D pitch.
+    \item Locate, chase, and intercept a moving soccer ball.
+    \item Coordinate with a teammate to advance the ball towards the goal.
+    \item Defend their own goal and score against two opponents.
 \end{enumerate}
 
-This problem is difficult because rewards are sparse (only a goal scores a 
-meaningful reward), the state space is high-dimensional and continuous, 
-and the presence of multiple simultaneously learning agents makes the 
-environment non-stationary from any individual agent's perspective.
+This task is exceptionally difficult. A goal occurs very rarely under random policies, meaning the reward signal is sparse. In addition, the state space contains continuous locations and velocities, and the concurrent learning of other agents breaks the Markov assumption from any single agent's point of view.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Aims and Objectives}
 \label{sec:intro_aims_obj}
 
-\textbf{Aim:} To design, implement, and evaluate a multi-agent deep reinforcement learning system capable of training autonomous soccer-playing agents in a physics-based 3D simulation using Proximal Policy Optimisation (PPO) with advanced reward shaping and spatial analytics.
+\textbf{Aim:} We aim to design, train, and evaluate a cooperative 2v2 soccer team in a continuous 3D MuJoCo simulation using PPO, reward shaping wrappers, and spatial analytics.
 
 \textbf{Objectives:}
 \begin{enumerate}
-    \item \textbf{O1} — Deploy and configure the MuJoCo Soccer 2v2 multi-agent environment using the Shimmy and PettingZoo frameworks, ensuring compatibility with state-of-the-art DRL architectures.
-    
-    \item \textbf{O2} — Design and formulate an aggressive reward shaping wrapper incorporating distance penalties, teammate coordinates, and goal-directed velocity metrics to mitigate the sparse reward challenge.
-    
-    \item \textbf{O3} — Train a shared cooperative team policy using PPO and the parameter-sharing paradigm to orchestrate multi-agent coordination.
-    
-    \item \textbf{O4} — Implement an advanced soccer analytics framework to extract ball possession statistics, teammate spatial coverage heatmaps, and coordinate-based team spreading dynamics.
+    \item \textbf{O1} — Set up and configure the MuJoCo 2v2 soccer environment using PettingZoo and Shimmy compatibility wrappers.
+    \item \textbf{O2} — Design a reward shaping wrapper to convert sparse goal rewards into dense guidance signals using distance and velocity metrics.
+    \item \textbf{O3} — Train a shared policy network using PPO and parameter sharing to coordinate the team.
+    \item \textbf{O4} — Develop an offline soccer analytics script to extract team possession percentages, team spreads, and 2D spatial density heatmaps.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Solution Approach}
 \label{sec:intro_sol}
 
-The solution follows a structured engineering workflow:
+Our engineering pipeline consists of four main stages:
 
 \begin{enumerate}
-    \item \textbf{Stage 1 — Multi-Agent Environment Architecture:} We wrap the raw MuJoCo 2v2 soccer environment using PettingZoo and Shimmy compatibility layers to establish a standardized parallel interface for vector-env parallelization.
-    
-    \item \textbf{Stage 2 — Reward Shaping \& Core Logic:} We design a custom `SoccerRewardShapingWrapper` that translates physical states (distances, relative velocities) into immediate shaped dense rewards, guiding agents to pursue the ball and cooperate.
-    
-    \item \textbf{Stage 3 — Policy Optimization \& Vectorization:} We deploy a shared MultiInput PPO policy, parallelizing experience gathering over 12 vectorized environments on Google Colab with T4 GPU acceleration.
-    
-    \item \textbf{Stage 4 — Soccer Analytics \& Spatial Heatmaps:} We extract real-world game statistics by simulating the trained policy, computing ball possession percentages, teammate spatial coverage density heatmaps on the pitch, and team spread metrics.
+    \item \textbf{Stage 1 — Environment Integration:} We wrap the MuJoCo 2v2 soccer environment with PettingZoo and Shimmy, creating a parallel vectorized interface to gather experience batches quickly.
+    \item \textbf{Stage 2 — Reward Wrapper Logic:} We write a custom `SoccerRewardShapingWrapper` class to shape rewards using physical metrics, motivating agents to run to the ball and shoot.
+    \item \textbf{Stage 3 — Policy Optimization:} We implement a shared PPO actor-critic network and run training on Google Colab using a single GPU (T4) with multiprocessing.
+    \item \textbf{Stage 4 — Spatial and Game Analytics:} We run post-training evaluations to collect agent positions, plotting 2D spatial hexbin heatmaps and calculating possession rates.
 \end{enumerate}
 
 % ================================================================
@@ -97,22 +64,22 @@ The solution follows a structured engineering workflow:
 \label{sec:proj_mgmt}
 % ================================================================
 
-The project was structured over a period of approximately three weeks, following the timeline summarised in Table~\ref{tab:gantt}.
+We scheduled our project over a three-week period. Table~\ref{tab:gantt} outlines the key phases and timelines of our work.
 
 \begin{table}[!ht]
     \centering
     \caption{Project management timeline}
     \label{tab:gantt}
-    \begin{tabular}{lp{5cm}c}
+    \begin{tabular}{llc}
         \toprule
         \textbf{Phase} & \textbf{Tasks} & \textbf{Duration} \\
         \midrule
-        1. Setup         & Environment installation, MuJoCo configuration, dependency management & Week 1 \\
-        2. Modeling      & Reward shaping formulation, state-action analysis, PPO hyperparameters & Week 1--2 \\
-        3. Main project  & Environment wrappers, training pipeline setup, Colab notebook & Week 2 \\
-        4. Training      & GPU training on Google Colab, automatic checkpoint monitoring & Week 2--3 \\
-        5. Analytics     & Possession analytics, teammate spacing, spatial heatmap generation & Week 3 \\
-        6. Report        & LaTeX report writing and submission & Week 3 \\
+        1. Setup         & Dependency installation, MuJoCo configuration, API wrapper checks & Week 1 \\
+        2. Modeling      & Reward shaping design, state-action interface analysis & Week 1--2 \\
+        3. Implementation & Environment wrappers, training scripts, Colab notebook structure & Week 2 \\
+        4. Training      & PPO model training on Colab, checkpoint saving & Week 2--3 \\
+        5. Analysis      & Team possession metrics, spatial coverage heatmaps & Week 3 \\
+        6. Compilation   & Writing the LaTeX report and finalizing code comments & Week 3 \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -122,10 +89,4 @@ The project was structured over a period of approximately three weeks, following
 \label{sec:intro_summary}
 % ================================================================
 
-In summary, this chapter established the context and objectives of the project.
-The investigated problem --- training multiple autonomous agents to play
-2-versus-2 football in a physics simulation using deep reinforcement learning ---
-was described in detail. Four measurable objectives were defined, and the
-three-stage solution approach was outlined. The project management plan was
-also presented. Chapter~\ref{ch:lit_rev} presents a review of the existing
-literature and course material relevant to this project.
+In this chapter, we presented the context, problem description, and objectives of our multi-agent soccer project. We defined four concrete objectives and outlined our solution workflow and timeline. In Chapter~\ref{ch:lit_rev}, we cover the theoretical foundations and literature review relevant to reinforcement learning.
