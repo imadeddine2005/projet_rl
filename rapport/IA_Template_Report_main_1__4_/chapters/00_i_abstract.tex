@@ -1,0 +1,10 @@
+\chapter*{\center \Large  Abstract}
+
+We train/assess MADRL players on a 2vs2 competitive football setting in a MuJoCo physics environment utilizing PettingZoo interface to allow fully autonomous players to learn how to chase a ball, play defence, and work together to score a goal from raw input data and no manual rules. Our primary methodology uses PPO reinforcement learning with a shared agent parameterization, enabling N/A solution for continuous action/state spaces, and N/A solution for extremely sparse reward issues were addressed by implementing/using custom reward shaping wrapper that calculates instantaneous rewards based on physical metrics such as distance penalties for chasing the ball, and speed of players toward goal.
+
+In addition, we evaluate tactical play via spatial analysis software which produces 2D pitch coverage heatmaps, team spatial distribution (spread), and team possession statistics. Training occurs via parallelized vectorized training runs on a single Google Colab T4 GPU. The resulting PPO agents exhibit excellent ball interception skills and team coordination/individual coordination. Additionally, the hexbin maps of the pitches indicate that teams divide the pitch naturally into offensive/defensive zones (by colour) in an approximate 50:50 possession distribution with 48\% (red) and 51\% (blue). Continuous reward wrappers and agent parameter sharing produce agents that have learned to overcome physics-based non-stationarity.
+
+
+~\\[1cm]
+\noindent
+\textbf{Keywords:} Multi-Agent Reinforcement Learning, Proximal Policy Optimisation, Parameter Sharing, Reward Shaping, MuJoCo Physics, Soccer Analytics, Spatial Heatmaps, PettingZoo.

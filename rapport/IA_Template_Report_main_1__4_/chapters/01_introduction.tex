@@ -1,0 +1,158 @@
+\chapter{Introduction}
+\label{ch:into}
+
+This chapter will explain the context of our project, the multi-agent challenges that we are tackling,
+the engineering objectives we will pursue, the methodology and solution approaches we will use,
+and the project management timeline for the project.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Project Presentation}
+\label{sec:proj_pres}
+
+\subsection{Background}
+\label{sec:into_back}
+
+The concept of Deep Reinforcement Learning (DRL) has brought a new level of innovation to 
+autonomous agent development. Instead of creating manual rules for every situation, we allow 
+the agent to learn through its own experiences in a given environment. Rather than relying 
+on a programmer to predict every single possible scenario and create an appropriate rule for 
+each scenario, the agent develops effective strategies through experimentation with the help 
+of a reward signal that reflects the quality of the decisions made. Successful examples of 
+DRL include AlphaGo~\citep{silver2016mastering} and deep Q learning networks which played 
+games like Atari~\citep{mnih2015humanlevel} where both used reinforcement learning to achieve 
+strategic intuition and behavioral complexity that could never be produced by a human programmer 
+through hard coding. These developments led to a great deal of interest in extending DRL to 
+even more challenging domains such as robot locomotion and real-time strategy gaming.
+
+MARL takes this idea even further than DRL by introducing multiple agents into one environment 
+learning simultaneously. This reality adds an entirely new level of challenge to learning; 
+now not only must an agent learn how to work by itself, but also learn how to change its 
+behavior based on the actions of the other agents in the environment. Depending on the type 
+of tasks being tested, it is possible for a number of different types of structures to exist 
+such as;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Problem Statement}
+\label{sec:intro_prob_art}
+
+Our main goal is to explore how we can use only reinforcement learning in training multiple 
+autonomous agents to work, cooperate and compete in a physics-based environment that has 
+continuous action space. There are four specific behaviors that four physically based agents 
+need to learn from nothing:
+
+\begin{enumerate}
+    \item The ability to control their joints and travel around in the continuous three 
+    dimensional pitch.
+    \item Locate, chase and intercept a moving soccer ball.
+    \item Coordinate with a teammate to carry the ball toward the goal.
+    \item Defend their own goal against two other opponents and attempt to score against them.
+\end{enumerate}
+
+Due to this nature of the task, it is very difficult to accomplish. Goals will not happen 
+often when executing random policies, resulting in a sparse reward signal. Moreover, state 
+space contains continuous position, direction and velocity, and partial-timed learning will 
+violate the Markov property for each individual agent.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Aims and Objectives}
+\label{sec:intro_aims_obj}
+
+Our goal is to investigate the design, training, and evaluation of a cooperative 2-on-2 (2v2) 
+soccer team using a continuous three-dimensional (3D) MuJoCo simulation with different analysis 
+methods and train the agents using Proximal Policy Optimization (PPO), reward shaping wrappers, 
+and spatial analysis.
+
+\textbf{Objectives:}
+
+\begin{enumerate}
+    \item Create and set up the MuJoCo 2v2 soccer environment by utilizing the PettingZoo 
+    and Shimmy wrappers so that each player in the 4-player simulation can interact in a 
+    stable manner across all four players in the physical environment.
+
+    \item Design a custom reward shaping wrapper to change goal-based (i.e., sparse) rewards 
+    to be dense (i.e., immediate) based on the distance and/or velocity of the agent to the 
+    goal so that an agent can receive useful and meaningful feedback during an episode, instead 
+    of just when the agent scores.
+
+    \item Use PPO along with a shared policy network and/or parameter sharing across all agents 
+    in order to train them to be able to exhibit cooperative behavior consistently and reduce 
+    sample complexity to improve the stability of the training in a non-stationary multi-agent 
+    environment.
+
+    \item Create a soccer analytics pipeline to analyze soccer data by extracting and 
+    visualizing the following metrics: team possession \%, spatial spread index, and hexbin 
+    density heatmap, to provide a quantitative basis for evaluating path developed tactical 
+    organization and positional role separation among agents.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Solution Approach}
+\label{sec:intro_sol}
+
+Four major components make up our engineering pipeline:
+
+\begin{itemize}
+    \item \textbf{Stage 1 --- Environment Integration:} To create a stable and fast parallel 
+    vectorized interface with multiple instances of the MuJoCo (2v2) soccer environment, we 
+    use PettingZoo and Shimmy compatibility wrappers. This not only gives us a single interface 
+    to all environments, but it also allows us to collect experience batches as quickly and 
+    efficiently as possible.
+
+    \item \textbf{Stage 2 --- Reward Wrapper Logic:} We create a new class 
+    (\texttt{SoccerRewardShapingWrapper}) to enhance the sparse goal-based reward signal with 
+    dense, physics-based feedback about how far away an agent is from the ball and how fast 
+    it is moving toward the goal, making sure that all agents receive meaningful feedback 
+    every step of the way.
+
+    \item \textbf{Stage 3 --- Policy Optimization:} We use a single shared PPO (actor-critic) 
+    network for all teammates and use Google Colab to train using 1 T4 GPU and multiprocessing 
+    to speed up the collection of experiences and updates to the policy across all the 
+    environments.
+
+    \item \textbf{Stage 4 --- Spatial and Game Analysis:} After training is finished, we run 
+    dedicated post-training evaluation episodes to log the position of the agent during each 
+    game. This positional data is then processed to create 2D hexbin density heatmaps showing 
+    coverage of the pitch and possession rate calculations for each team to quantify their 
+    ball control relatively.
+\end{itemize}
+
+% ================================================================
+\section{Project Management}
+\label{sec:proj_mgmt}
+% ================================================================
+
+We scheduled our project over a three-week period. Table~\ref{tab:gantt} outlines the key phases and timelines of our work.
+
+\begin{table}[!ht]
+    \centering
+    \caption{Project management timeline}
+    \label{tab:gantt}
+    \begin{tabular}{llc}
+        \toprule
+        \textbf{Phase} & \textbf{Tasks} & \textbf{Duration} \\
+        \midrule
+        1. Setup         & Dependency installation, MuJoCo configuration, API wrapper checks & Week 1 \\
+        2. Modeling      & Reward shaping design, state-action interface analysis & Week 1--2 \\
+        3. Implementation & Environment wrappers, training scripts, Colab notebook structure & Week 2 \\
+        4. Training      & PPO model training on Colab, checkpoint saving & Week 2--3 \\
+        5. Analysis      & Team possession metrics, spatial coverage heatmaps & Week 3 \\
+        6. Compilation   & Writing the LaTeX report and finalizing code comments & Week 3 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% ================================================================
+\section{Summary}
+\label{sec:intro_summary}
+% ================================================================
+
+This chapter describes the framework, problem statement and goals for our multi-agent soccer 
+project. We established four clearly defined objectives: integrating into an environment, 
+shaping the reward function, optimising the policy, and performing spatial analysis. We also 
+produced a complete solution workflow and timeline. These objectives demonstrated the complexity 
+of the project due to the effects of continuous action spaces, non-stationary multi-agents, 
+and sparse reward signals all typical of environments with goal scoring. In Chapter~\ref{ch:lit_rev}, 
+we will provide theoretical basis and literature review associated with reinforcement learning, 
+such as Markov Decision Processes, and value-based methods of reinforcement learning; as well 
+as algorithms of continuous actor-critic methods that serve as a foundation for our PPO based 
+training.

@@ -1,0 +1,51 @@
+\chapter{Conclusions and Future Work}
+\label{ch:conclusion}
+
+This chapter presents a summary of our findings in relation to each of the four project goals we established in the first part of the project. We assess how each phase of our engineering pipeline contributed to our broad goal of training a cooperative soccer agent.
+We will also include a number of concrete ideas for future work. These proposals are made with consideration to the technical limitations we experienced during development, focusing on increasing the scale of the training steps taken, optimizing hyperparameter settings for performance, and developing asymmetric architectures to allow each agent to fulfill a specific role in the larger team setting.
+
+% ================================================================
+\section{Conclusions}
+\label{sec:conclusions}
+% ================================================================
+
+In this project, a cooperative multiple agent deep reinforcement learning system was developed to support studies in cooperative behavior among multiple agents using a team of four players playing soccer (2v2). One of the goals of the project was to facilitate researchers in addressing the sparse reward problem associated with multiple agent research. The work generated a solid basis for furthering studies in cooperation among multiple agents through spatial analysis. The work was accomplished by following a structured engineering process:
+\begin{enumerate}
+    \item The creation of a 2v2 MuJoCo soccer simulation environment that was wrapped with PettingZoo and Shimmy to establish a uniform continuous API.
+    \item The creation of a custom reward shaping wrapper class that implements a way to shape the rewards for the multiple agents using continuous coordinates.
+    \item The training of a shared actor-critic PPO model (Proximal Policy Optimization) using a Google Colab T4 GPU, where SuperSuit was used to vectorize the environment to train the model and the shared policy.
+    \item The creation of a spatial analysis tool to create and track the coordinates of the 2D hexbin density heatmaps based on the coordinates generated during the training process.
+\end{enumerate}
+
+Findings include:
+
+\begin{itemize}
+    \item \textbf{O1 (Environment Architecture)}: Increasing data collection multiplicatively from an agent's experiences within a policy training by completely replacing their experiences in real-time with all of the experiences from another agent encapsulated in one vectorized PPO on four times the data as when trained via individual policy).
+    \item \textbf{O2 (Reward Shaping)}: Creating and implementing actual distance to agent penalties on a continuous basis, and angular velocity on a continuous and real-time basis, is necessary to be able to learn in order to create a policy for each team (as no agent scoring penalties on a random or exploratory basis delays training with very low reward).
+    \item \textbf{O3 (Policy Training)}: The resulting vectorized PPO model made significant converging steps (500,000) towards becoming fully functional policies with an average of 0.73 overall positive reward per episode.
+    \item \textbf{O4 (Soccer Analytics)}: The ability to visually represent the layout of agents on the field (utilizing hexbin heat maps) and to understand the dynamic difference in distances between all teammates (5.4m) reflects that agents will naturally space themselves optimally across the field according to the strategic objectives of each team in order to maximize scoring opportunities.
+\end{itemize}
+
+In conclusion, we created a completely free and modular multi-agent physics training pipeline with multiple modules, and addressed the sparse reward problem by implementing continuous shaping wrappers.
+
+% ================================================================
+\section{Future Work}
+\label{sec:future_work}
+% ================================================================
+
+With the constraints we observed during the training and evaluation stages, we advocate these directions for upcoming studies:
+\begin{itemize}
+    \item \textbf{Extended Training Scales}: Proximal Policy Optimisation cannot efficiently sample when solving high-dimension, continuous control problems. Training requires lower sample sizes of approximately 500,000 steps for the agent to identify fundamental locomotion movements, ball-seeking behaviours, and goal-directed movement.  Conversely, to additionally develop complex strategic game-play behaviours, such as small and large team-based cooperative tactics like passing, crossing, etc., and team-based defensive tactics (e.g., marking), agent training would need to be conducted over 10 million to 50 million training steps.
+    \item \textbf{Hyperparameter/reward tuning automation}: The coefficients used to shape the rewards were determined through manual trial and error runs in Google Colab.  Such manual tuning processes typically result in the agent concentrating too highly on proximity to the ball at the cost of continuing to advance play.  In the future, an automation framework like Bayesian Optimization or Population Based Training should be developed where the values of the coefficients can be optimally fit to objective metrics (e.g., goal scoring rate and winning match percentages).
+    \item \textbf{Asymmetric Policies and Role Specialisation}: Parameter Sharing as currently implemented means both players on a team will use the same policy network. This has the advantages of speeding up training and reducing parameter footprint for each agent but hinders ability to develop specialised roles for agents. Future versions should create a different neural network per every agent, so that asymmetric development of role specialisation (for example, having a goalkeeper stay close to the goal and a striker move into the attacking areas) may occur.
+    \item \textbf{MAPPO and Centralized Training, Decentralized Execution
+}: Changing from the base PPO model to MAPPO gives us the ability of implementing the Centralized Training, Decentralized Execution framework. During training the Centralized Critic network is able to see the entire environment (what position the other players are in, real velocity of the ball, what distance between teams) resulting in a much more stable estimation of the values. Once trained, during execution each agent will only use its own local egocentric perception of the environment when deciding what to do, thus keeping the actual execution completely decentralized.
+\end{itemize}
+
+% ================================================================
+\section{Summary}
+\label{sec:con_summary}
+% ================================================================
+
+This chapter summarizes the results of our overall project through a comparative review of how our experimental findings correspond to the four major objectives established in Chapter 1. We demonstrated that all four of the major objectives defined in Chapters 1 through 4 (Environment Wrapping, Custom Reward Shaping, Shared-Policy Training, and Post-Match Analytics) have been achieved.
+We also presented a number of specific areas for further research, including increasing the total number of training steps, optimizing reward values, allowing for asymmetric roles within teams, and evolving to a MAPPO (Multi-Agent Proximal Policy Optimization) centralized-critic architecture. Together, these areas identify a specific pathway for the continued development from basic locomotion to more complex soccer strategies. Finally, in Chapter 7, we provide our own thoughts regarding our experience in overcoming the engineering and team dynamics issues we faced throughout this project.

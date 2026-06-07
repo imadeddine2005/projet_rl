@@ -1,0 +1,72 @@
+\chapter{Discussion and Analysis}
+\label{ch:evaluation}
+
+This chapter provides an in-depth look at our findings, specifically regarding the interplay of
+PPO, the evaluation of our created rewards, and the technical and physical limitations we
+encountered.
+
+% ================================================================
+\section{Interpretation of Results}
+\label{sec:interpretation}
+% ================================================================
+
+\subsection{Cooperative Multi-Agent Coordination via PPO}
+\label{subsec:disc_ppo}
+
+Our study revealed that when PPO is paired with weight-sharing, agents learn to play soccer quite well. The average mean reward of 0.73, as indicated in Table 4.1, shows that each agent remains in control of their own activities throughout the game.
+Because we have all agents' transitions feeding into the same gradient update due to weight-sharing, we are effectively obtaining four times as much experience data per agent during network training sessions. As a result, PPO has converged much quicker than it would have if we trained separate networks for each agent (consistent with previous work on cooperative reinforcement learning; Gupta et al., 2017). However, both agents must use the same neural network due to the weight-sharing mechanism. This being said, agents were still able to formulate a spatial distribution across the field without colliding into one another.
+
+\subsection{Effectiveness of Custom Reward Shaping}
+\label{subsec:disc_reward_shaping}
+
+The bundled custom reward shaping function wrapper that we created (as seen in Equation 3.1) was the main factor contributing to agent's ability to reach convergence. Using the default sparse reward approach in the environment's first round of experiments caused our robots to not learn how to take any meaningful steps toward completing the task, but instead they just sat there spinning in circles. This issue happened because there were not enough opportunities to 'score' points by randomly exploring the environment to create a reliable gradient. The components that made up our wrapper were specifically designed to help solve this credit assignment problem. 
+
+\begin{itemize}
+    \item The distance penalty ($r_{\text{dist}}$) A continuous negative potential field related to the Euclidean distance between robot and ball; therefore, the more distance there is between the robot and the ball, the greater the penalty will be for the robot trying to close the gap to the ball; thus, the robots could not remain in their start position without incurring a penalty.
+    \item The velocity reward ($r_{\text{vel}}$) The velocity vector for the robot projected toward the where the ball is located. Therefore, if the robot receives a reward for getting to the ball more quickly (i.e., accelerating or sprinting), then the robot will have more of an incentive to get to the ball faster to ultimately be able to interact with it sooner.
+    \item The goal velocity reward ($r_{\text{goal}}$) Velocity of the ball as compared to its path and distance from the goal. Therefore, receiving a reward for getting to the goal sooner (i.e., moving/striking the ball in the correct direction) will give the robot instant positive feedback to push or kick the ball toward or into the goal.
+\end{itemize}
+By creating three physical measurements (distance, velocity, goal velocity) we were able to change the sparse goal scoring reward system into a dense optimization landscape where PDP received instant directional feedback about the completion value of each step in the simulation process.
+
+\subsection{Spatial Coverage Heatmaps and Teammate Spacing Dynamics}
+\label{subsec:disc_spatial_analytics}
+
+The figures presented in figure (4.2) demonstrate that the teams were strategically positioned in each phase:
+\begin{itemize}
+    \item \textbf{Field Positioning}: The attacking team (Team Red) are mostly found in the opposing team’s latter halves while the defending team (Team Blue) were found clustered in their own defensive third in order to safeguard their goals. This division was due to the fact that both teams played organically rather than attempting to abide by a pre-defined regimen or coordinate.
+    \item \textbf{Teammate Spacing}: Teammate distances averaged 5.39 m (Team Red) and 5.47 m (Team Blue). The agent game experiences demonstrate that agents did not cluster ( like pre-school children) but were able to successfully spread out in order to cover available passing lanes.
+    \item \textbf{Match Balance}: Loan possession sharing (48.6\% to 51.4\%) demonstrates that all training executions produced balanced and competitive team game strategies .
+\end{itemize}
+
+% ================================================================
+\section{Significance of the Findings}
+\label{sec:significance}
+% ================================================================
+
+\begin{itemize}
+    \item \textbf{Contributions to Engineering}: We demonstrate methods to develop parallel environments that can be used together via MuJoCo, PettingZoo, and Stable-Baselines3. The code we have written for the custom reward wrapper will be widely useful to other continuous physics problems.
+    \item \textbf{Setting up the Infrastructure}: We developed a training pipeline within Google Colab that automatically handles model checkpointing. As a result, students will now be able to use free cloud GPU resources to train complex multi-agent models.
+\end{itemize}
+
+% ================================================================
+\section{Limitations}
+\label{sec:limitations}
+% ================================================================
+
+The following are limitations associated with our current work:
+
+\begin{itemize}
+    \item \textbf{Google Colab Session Restrictions}: Free Google Colab sessions are frequently disconnecting from one another. While our checkpoints would maintain a record of our progress, it would be challenging to complete training runs longer than 10 million steps due to these interruptions.
+    \item \textbf{Symmetry of Policy}: Since we employed shared parameters in order to ensure that our agents' policy networks were identical in nature, our agents were precluded from developing specialized positions (for example, there will consistently be one goalkeeper and one striker).
+    \item \textbf{Manual Reward Weight Tuning}: We determined our reward coefficients (-0.01, +0.10, +0.50) via trial and error. While a systematic search through a grid might identify better arrangements, the computational budget has prevented us from conducting such a search.
+    \item \textbf{Evaluation Matches}: Due to rendering time, we limited evaluations to 10 matches. If we were to conduct additional matches, the statistical variance would be minimized.
+\end{itemize}
+
+% ================================================================
+\section{Summary}
+\label{sec:discussion-summary}
+% ================================================================
+
+In this chapter, we evaluated the results of our evaluation from the previous chapter and looked at the results of evaluating our custom reward component of our project, and explored the overall limitations of our project as a whole as well.
+The evidence supports our original research hypotheses, in terms of demonstrating that Proximal Policy Optimisation, coupled with shared parameters and continuous shaping repos, can produce and develop agents who exhibit cooperative behaviours to a complex environment containing three-dimensional (3D) physics. Both the quantitative spatial tracking metrics and metrics demonstrating whether the agents had possession of the ball verify that agents have learned about tactically positioning themselves when on the field, covering as much of the field as possible, and maintaining a sufficient distance from one another so that they could avoid colliding with one another.
+Despite the existence of some limitations to our work, such as the limitations received by using Google Colab, manual tuning of our reward coefficients, and the symmetry of the agent policies; these limitations do not alter the validity of our results. Instead, they provide a basic framework to follow for making improvements to the overall project, which will be addressed in the following chapter.

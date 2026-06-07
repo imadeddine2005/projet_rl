@@ -1,0 +1,32 @@
+\chapter{Reflection}
+\label{ch:reflection}
+
+In this chapter we will reflect on this Engineering project, identify our decisions and how we worked through our Engineering challenges, and note what we learned as a team.The Skill and Competence Acquisition Process Prior to starting on this project we had never worked with RL outside of an academic environment and were aware of RL primarily through the lectures by Professor Hirchoua Badr at the ENSAM-Casablanca. Design and training of agents in a 2v2 soccer environment transformed the theoretical into practical engineering capabilities.We have developed an understanding of how different components of PPO (Clipping ratio, Advantage estimates, Entropy coefficients) have led t preventing the collapse of Policies in practice. The integration of the Libraries (Shimmy, PettingZoo, SuperSuit and Stable-Baselines3) was an exercise in Systems Engineering. We encountered dependencies and debugging issues related to pickling of the Custom Wrapper in PyTorch, where serialising the Custom Wrapper across multiple cores caused problems.
+
+\bigskip
+\noindent\textbf{Technical Limitations and Problem Solving} \\
+We have to deal with a major issue of misconfigured character encoding for our Windows Command Line and our Python Scripts. The scripts produce an output as UTF-8 encoded soccer pitch diagrams and logs. The Windows Command Line uses CP1252 encoding. This mismatch in encoding caused our scripts to crash due to an encoding error. We resolved this issue by changing our Python Scripts to modify the character encoding for standard out from CP1252 to UTF-8, similar to the following code:
+\begin{lstlisting}[language=Python]
+import sys
+if sys.platform.startswith('win'):
+    sys.stdout.reconfigure(encoding='utf-8')
+\end{lstlisting}
+This incident made us aware that, even though small differences in the environment can happen, they can lead to very large problems during the deployment process.
+Using a laptop that didn't have a dedicated NVDIA GPU slowed down the local training, which is another limitation that we faced while training our models. We were able to use a T4 GPU when we moved to Google Colab, but we had to deal with the 12-hour session limits. To address this, we created a custom callback to save the model checkpoints directly to Google Drive every 200,000 steps so that we only lost about an hour of training time if for some reason our Colab session timed out.
+
+\bigskip
+\noindent\textbf{Teamwork and Development Strategy.} \\
+We split our tasks across both members of our team (Imad Eddine Oukrati and Mohamed Echchyoughi) with one developing the training loops using Colab, and the other creating the spatial tracking and analysis scripts for generating the 2D hexbin map.
+
+If we could do it all over again, we would implement our integration tests much earlier in the project. During the project we ran into numerous serialization errors and spent an undue amount of time debugging them prior to Final Release. A short 1,000 step test run at the beginning of the project would have saved us several days of search time for these types of errors. We also would have set up TensorBoard from the first run to monitor the convergence in real time.
+
+\bigskip
+\noindent\textbf{Impact on our Engineering Approach.} \\
+This project showed us the difference between reading about an algorithm in a textbook and implementing it in a physical simulator. The issues we encountered (multiprocessing serialization, encoding errors, and resource constraints) are rarely covered in theory, yet they represent a large portion of a machine learning engineer's daily work. This experience has prepared us to handle complex, continuous multi-agent systems in our future studies and careers.
+
+% ================================================================
+\section{Summary}
+\label{sec:reflection_summary}
+% ================================================================
+
+At the end of the chapter we present an overview of our personal learning experience as well as reflections on the way we approached engineering as a team. Following this section, we will list all the citations of academic papers and software libraries that were used for this project in our reference list.

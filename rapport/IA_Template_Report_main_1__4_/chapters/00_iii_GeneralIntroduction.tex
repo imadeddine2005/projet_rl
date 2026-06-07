@@ -1,0 +1,39 @@
+\chapter*{General Introduction}
+\label{ch:intoGen}
+
+Multi-agent reinforcement learning (MARL) is the application of reinforcement learning (RL) 
+to multiple agent systems where the agents utilize their previous experiences to improve 
+their performance through trial-and-error learning. Unlike traditional supervised learning 
+approaches where learning occurs using an existing dataset, MARL allows agents to try out 
+different possible actions and find alternatives to control and navigate in the environment 
+without needing to have specific programming instructions to control actions in certain ways.
+
+This research explores the application of MARL in developing a RL-based 3D physical soccer 
+environment based on the MuJoCo physics engine. The 3D soccer simulation enables two teams 
+of four players (2 vs 2) to play against each other without any set rules written into the 
+code base of the soccer simulation application. The agents or players are required to learn 
+how to control their bodies and coordinate their efforts in order to run to the ball, make 
+passes to teammates, and kick the ball into the goal to score points. The task becomes 
+progressively more complicated by using continuous action spaces, the interacting dynamic 
+relationships between agents, as well as the rapidly changing environment due to the 
+real-time actions of all five agents updating policy simultaneously.
+
+In this project, we will focus our study on the theoretical underpinnings of modern 
+reinforcement learning techniques by initially studying issues associated with discrete 
+variables (tabular Q learning and discrete Q networks).
+
+\section*{Organization of the report}
+\label{sec:intro_org}
+
+The remainder of this report will be organized as follows: Chapter~\ref{ch:into} describes 
+the context of our host organization (ENSAM Casablanca), project scope and specific objectives; 
+Chapter~\ref{ch:lit_rev} examines the mathematical basis for Reinforcement Learning, including 
+Markov Decision Processes (MDPs), value based methods, and Continuous Actor-Critic algorithms; 
+Chapter~\ref{ch:method} covers our methodology in detail, including environment setup, custom 
+reward wrappers, and hyperparameter settings; Chapter~\ref{ch:results} provides our quantitative 
+evaluation of the research data collected, with examples of both rewards and 2-dimensional 
+spatial hexbin heat maps; Chapter~\ref{ch:evaluation} discusses cooperative behaviours among 
+teams, team spreads, and physical limitations associated with cooperation; Chapter~\ref{ch:conclusion} 
+wraps up this research project and provides thoughts on future directions for the project; 
+and Chapter~\ref{ch:reflection} provides an individual engineering and learning reflection 
+on the work done.

@@ -1,0 +1,23 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# LaTeX temporary files
+rapport/**/*.aux
+rapport/**/*.log
+rapport/**/*.toc
+rapport/**/*.out
+rapport/**/*.lof
+rapport/**/*.lot
+rapport/**/*.bbl
+rapport/**/*.blg
+rapport/**/*.synctex.gz
+rapport/**/*.fdb_latexmk
+rapport/**/*.fls
+
+# Large Zip files and backups
+*.zip
+*.rar
+*.7z
+*.tar.gz
